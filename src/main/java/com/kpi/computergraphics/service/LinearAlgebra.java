@@ -61,8 +61,12 @@ public class LinearAlgebra {
         return moveByVector(p, constantMultiply(v, k));
     }
 
-    public static double distance(Vector3D v1) {
+    public static double length(Vector3D v1) {
         return Math.sqrt(scalarMultiply(v1, v1));
+    }
+
+    public static double distance(Point3D p1, Point3D p2) {
+        return length(new Vector3D(p1, p2));
     }
 
     public static Vector3D constantMultiply(Vector3D v, float constant) {

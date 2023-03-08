@@ -8,6 +8,9 @@ import com.kpi.computergraphics.model.object.Sphere;
 import com.kpi.computergraphics.service.LinearAlgebra;
 import lombok.RequiredArgsConstructor;
 
+import java.util.AbstractMap.SimpleEntry;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -53,18 +56,36 @@ public class SimpleScene {
                 final Point3D target = LinearAlgebra.moveByVectorAtDistance(pLeft, moveHeight, step * i);
                 final Line beam = new Line(target, new Vector3D(camera.getPlace(), target));
 
-                boolean intersect = false;
+                final List<SimpleEntry<Object3D, Point3D>> intersections = new ArrayList<>();
                 for (Object3D object : objects) {
                     if (object instanceof Sphere s) {
                         final Point3D[] intersectPoints = LinearAlgebra.intersects(beam, s);
                         if (intersectPoints != null) {
-                            intersect = true;
+                            Arrays.stream(intersectPoints)
+                                    .forEach(point -> intersections.add(new SimpleEntry<>(object, point)));
+                            break;
                         }
                     }
                 }
 
-                if (intersect) {
-                    System.out.print("#");
+                if (!intersections.isEmpty()) {
+                    final SimpleEntry<Object3D, Point3D> closestPoint = this.findClosestPoint(intersections);
+                    final Vector3D normalVector = this.findNormalVector(closestPoint.getKey(), closestPoint.getValue());
+
+                    final float scalarLight = (float) LinearAlgebra.scalarMultiply(vls.getDirection(), normalVector);
+                    final char toPrint;
+                    if (scalarLight < 0) {
+                        toPrint = ' ';
+                    } else if (scalarLight < 0.2) {
+                        toPrint = '.';
+                    } else if (scalarLight < 0.5) {
+                        toPrint = '*';
+                    } else if (scalarLight < 0.8) {
+                        toPrint = 'O';
+                    } else {
+                        toPrint = '#';
+                    }
+                    System.out.print(toPrint);
                 } else {
                     System.out.print(" ");
                 }
@@ -75,5 +96,29 @@ public class SimpleScene {
 
     private float findScreenHeight() {
         return 2*camera.getScreen().getDistance()*(float)Math.tan(camera.getFov() * Math.PI / 180);
+    }
+
+    private SimpleEntry<Object3D, Point3D> findClosestPoint(List<SimpleEntry<Object3D, Point3D>> points) {
+        if (points.isEmpty()) {
+            return null;
+        }
+
+        Point3D cameraPoint = camera.getPlace();
+        SimpleEntry<Object3D, Point3D> closest = points.get(0);
+        for (int i = 1; i < points.size(); i++) {
+            final SimpleEntry<Object3D, Point3D> newPoint = points.get(i);
+            if (LinearAlgebra.distance(cameraPoint, closest.getValue()) >
+                    LinearAlgebra.distance(cameraPoint, newPoint.getValue())) {
+                closest = newPoint;
+            }
+        }
+        return closest;
+    }
+
+    private Vector3D findNormalVector(Object3D object3D, Point3D touch) {
+        if (object3D instanceof Sphere s) {
+            return new Vector3D(s.getCenter(), touch);
+        }
+        return null;
     }
 }
