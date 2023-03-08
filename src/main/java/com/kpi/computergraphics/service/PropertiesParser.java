@@ -1,7 +1,9 @@
 package com.kpi.computergraphics.service;
 
+import com.kpi.computergraphics.model.base.Plane;
 import com.kpi.computergraphics.model.base.Point3D;
 import com.kpi.computergraphics.model.base.Vector3D;
+import com.kpi.computergraphics.model.object.Circle3D;
 import com.kpi.computergraphics.model.object.Object3D;
 import com.kpi.computergraphics.model.object.Sphere;
 
@@ -103,6 +105,15 @@ public class PropertiesParser {
                     sphere.setCenter(PropertiesParser.parsePointFromProp(objectProps.get("center")));
                     sphere.setRadius(Float.parseFloat(objectProps.get("radius")));
                     objects.add(sphere);
+                } else if ("circle".equals(type)) {
+                    final Circle3D circle3D = new Circle3D();
+                    final Point3D center = PropertiesParser.parsePointFromProp(objectProps.get("center"));
+                    final Plane plane = new Plane(PropertiesParser.parseVectorFromProp(objectProps.get("plane.normal")),
+                            center);
+                    circle3D.setCenter(center);
+                    circle3D.setRadius(Float.parseFloat(objectProps.get("radius")));
+                    circle3D.setPlane(plane);
+                    objects.add(circle3D);
                 }
             }
 

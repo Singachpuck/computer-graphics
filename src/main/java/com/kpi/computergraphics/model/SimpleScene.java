@@ -1,8 +1,10 @@
 package com.kpi.computergraphics.model;
 
+import com.kpi.computergraphics.exception.UnsupportedShapeException;
 import com.kpi.computergraphics.model.base.Line;
 import com.kpi.computergraphics.model.base.Point3D;
 import com.kpi.computergraphics.model.base.Vector3D;
+import com.kpi.computergraphics.model.object.Circle3D;
 import com.kpi.computergraphics.model.object.Object3D;
 import com.kpi.computergraphics.model.object.Sphere;
 import com.kpi.computergraphics.service.LinearAlgebra;
@@ -58,13 +60,18 @@ public class SimpleScene {
 
                 final List<SimpleEntry<Object3D, Point3D>> intersections = new ArrayList<>();
                 for (Object3D object : objects) {
+                    final Point3D[] intersectPoints;
                     if (object instanceof Sphere s) {
-                        final Point3D[] intersectPoints = LinearAlgebra.intersects(beam, s);
-                        if (intersectPoints != null) {
-                            Arrays.stream(intersectPoints)
-                                    .forEach(point -> intersections.add(new SimpleEntry<>(object, point)));
-                            break;
-                        }
+                        intersectPoints = LinearAlgebra.intersects(beam, s);
+
+                    } else if (object instanceof Circle3D c) {
+                        intersectPoints = LinearAlgebra.intersects(beam, c);
+                    } else {
+                        throw new UnsupportedShapeException(object.getClass().getName());
+                    }
+                    if (intersectPoints != null) {
+                        Arrays.stream(intersectPoints)
+                                .forEach(point -> intersections.add(new SimpleEntry<>(object, point)));
                     }
                 }
 
@@ -118,6 +125,8 @@ public class SimpleScene {
     private Vector3D findNormalVector(Object3D object3D, Point3D touch) {
         if (object3D instanceof Sphere s) {
             return new Vector3D(s.getCenter(), touch);
+        } else if (object3D instanceof Circle3D c) {
+            return c.getPlane().getNormal();
         }
         return null;
     }

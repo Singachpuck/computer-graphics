@@ -1,11 +1,15 @@
 package com.kpi.computergraphics.service;
 
 import com.kpi.computergraphics.model.base.Line;
+import com.kpi.computergraphics.model.base.Plane;
 import com.kpi.computergraphics.model.base.Point3D;
 import com.kpi.computergraphics.model.base.Vector3D;
+import com.kpi.computergraphics.model.object.Circle3D;
 import com.kpi.computergraphics.model.object.Sphere;
 
 public class LinearAlgebra {
+
+    private static final double FLOAT_EPSILON = 1e-5;
 
     public static Point3D[] intersects(Line line, Sphere sphere) {
         final Point3D lp = line.getPoint();
@@ -39,6 +43,45 @@ public class LinearAlgebra {
         p2.setZ((float) (ldv.getZ() * t2 + lp.getZ()));
 
         return new Point3D[] { p1, p2 };
+    }
+
+    public static Point3D[] intersects(Line line, Circle3D circle3D) {
+        final Point3D[] intersectCirclePlane = intersects(line, circle3D.getPlane());
+
+        if (intersectCirclePlane != null && intersectCirclePlane.length == 1) {
+            if (distance(intersectCirclePlane[0], circle3D.getCenter()) <= circle3D.getRadius()) {
+                return intersectCirclePlane;
+            }
+        }
+        return null;
+    }
+
+    public static Point3D[] intersects(Line line, Plane plane) {
+        final Point3D linePoint = line.getPoint();
+        final Vector3D lineDirection = line.getDirection();
+        final Point3D planePoint = plane.getPoint();
+        final Vector3D planeNormal = plane.getNormal();
+
+        if (Math.abs(scalarMultiply(lineDirection, planeNormal)) < FLOAT_EPSILON) {
+            return null;
+        }
+
+        final Vector3D diff = new Vector3D(planePoint, linePoint);
+        final float tmp1 = (float) scalarMultiply(diff, planeNormal);
+        final float tmp2 = (float) scalarMultiply(lineDirection, planeNormal);
+        final float k = tmp1 / tmp2;
+
+        final Point3D intersection = moveByVector(linePoint, invert(constantMultiply(lineDirection, k)));
+        return new Point3D[] { intersection };
+    }
+
+    public static boolean isDependant(Vector3D v1, Vector3D v2) {
+        final float epsilon = (float) 1e-5;
+        final float k1 = v1.getX() / v2.getX();
+        final float k2 = v1.getY() / v2.getY();
+        final float k3 = v1.getZ() / v2.getZ();
+
+        return Math.abs(k1 - k2) < epsilon && Math.abs(k1 - k3) < epsilon;
     }
 
     public static double scalarMultiply(Vector3D v1, Vector3D v2) {
