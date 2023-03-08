@@ -9,7 +9,7 @@ import com.kpi.computergraphics.model.object.Sphere;
 
 public class LinearAlgebra {
 
-    private static final double FLOAT_EPSILON = 1e-5;
+    public static final double FLOAT_EPSILON = 1e-5;
 
     public static Point3D[] intersects(Line line, Sphere sphere) {
         final Point3D lp = line.getPoint();
