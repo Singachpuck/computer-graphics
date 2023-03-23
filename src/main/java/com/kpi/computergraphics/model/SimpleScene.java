@@ -1,18 +1,14 @@
 package com.kpi.computergraphics.model;
 
-import com.kpi.computergraphics.exception.UnsupportedShapeException;
 import com.kpi.computergraphics.model.base.Line;
 import com.kpi.computergraphics.model.base.Point3D;
 import com.kpi.computergraphics.model.base.Vector3D;
-import com.kpi.computergraphics.model.object.Circle3D;
 import com.kpi.computergraphics.model.object.Object3D;
-import com.kpi.computergraphics.model.object.Sphere;
 import com.kpi.computergraphics.service.LinearAlgebra;
 import lombok.RequiredArgsConstructor;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -58,26 +54,24 @@ public class SimpleScene {
                 final Point3D target = LinearAlgebra.moveByVectorAtDistance(pLeft, moveHeight, step * i);
                 final Line beam = new Line(target, new Vector3D(camera.getPlace(), target));
 
-                final List<SimpleEntry<Object3D, Point3D>> intersections = new ArrayList<>();
+                SimpleEntry<Object3D, Point3D> closest = null;
                 for (Object3D object : objects) {
-                    final Point3D[] intersectPoints;
-                    if (object instanceof Sphere s) {
-                        intersectPoints = LinearAlgebra.intersects(beam, s);
+                    final Point3D[] intersectPoints = object.intersects(beam);
+                    if (intersectPoints != null && intersectPoints.length != 0) {
+                        final List<SimpleEntry<Object3D, Point3D>> points = new ArrayList<>();
+                        for (Point3D intersectPoint : intersectPoints) {
+                            points.add(new SimpleEntry<>(object, intersectPoint));
+                        }
+                        if (closest != null) {
+                            points.add(closest);
+                        }
 
-                    } else if (object instanceof Circle3D c) {
-                        intersectPoints = LinearAlgebra.intersects(beam, c);
-                    } else {
-                        throw new UnsupportedShapeException(object.getClass().getName());
-                    }
-                    if (intersectPoints != null) {
-                        Arrays.stream(intersectPoints)
-                                .forEach(point -> intersections.add(new SimpleEntry<>(object, point)));
+                        closest = this.findClosestPoint(points);
                     }
                 }
 
-                if (!intersections.isEmpty()) {
-                    final SimpleEntry<Object3D, Point3D> closestPoint = this.findClosestPoint(intersections);
-                    final Vector3D normalVector = this.findNormalVector(closestPoint.getKey(), closestPoint.getValue());
+                if (closest != null) {
+                    final Vector3D normalVector = closest.getKey().normal(closest.getValue());
 
                     final float scalarLight = (float) LinearAlgebra.scalarMultiply(vls.getDirection(), normalVector);
                     final char toPrint;
@@ -120,14 +114,5 @@ public class SimpleScene {
             }
         }
         return closest;
-    }
-
-    private Vector3D findNormalVector(Object3D object3D, Point3D touch) {
-        if (object3D instanceof Sphere s) {
-            return new Vector3D(s.getCenter(), touch);
-        } else if (object3D instanceof Circle3D c) {
-            return c.getPlane().getNormal();
-        }
-        return null;
     }
 }
