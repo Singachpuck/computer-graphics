@@ -16,7 +16,7 @@ public class Matrix {
             throw new IllegalArgumentException("Matrix can't be multiplied, wrong dimensions");
         }
 
-        Matrix result = new Matrix(new double[array.length][secondMatrix.array[0].length]);
+        var result = new Matrix(new double[array.length][secondMatrix.array[0].length]);
 
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < secondMatrix.array[0].length; j++) {

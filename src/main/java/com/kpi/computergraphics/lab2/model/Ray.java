@@ -16,4 +16,12 @@ public class Ray {
     public double radsAngleWith(Ray ray) {
         return vector.radsAngleWith(ray.vector);
     }
+
+    public Vector3D start() {
+        return start;
+    }
+
+    public Vector3D vector() {
+        return vector;
+    }
 }

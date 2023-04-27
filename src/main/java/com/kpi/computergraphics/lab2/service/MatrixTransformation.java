@@ -53,8 +53,8 @@ public class MatrixTransformation {
                 {0, 0, 1, 0},
                 {0, 0, 0, 1}
         };
-        Matrix identityMatrix = new Matrix(identityArr);
-        Matrix matrix = rotateXMatrix(angleX).multiply(identityMatrix);
+        var identityMatrix = new Matrix(identityArr);
+        var matrix = rotateXMatrix(angleX).multiply(identityMatrix);
         matrix = rotateYMatrix(angleY).multiply(matrix);
         matrix = rotateZMatrix(angleZ).multiply(matrix);
         return matrix;
@@ -71,13 +71,13 @@ public class MatrixTransformation {
     }
 
     public static Vector3D transform(Vector3D vector, Matrix transformMatrix) {
-        Matrix vectorMatrix = transformFromVector(vector);
+        var vectorMatrix = transformFromVector(vector);
         return transformMatrix.multiply(vectorMatrix).toVector();
     }
 
     public static double transform(double scalar, Matrix transformMatrix) {
         double[][] scalarMatrix = {{scalar}, {0}, {0}, {0}};
-        Matrix vectorMatrix = new Matrix(scalarMatrix);
+        var vectorMatrix = new Matrix(scalarMatrix);
         return transformMatrix.multiply(vectorMatrix).get(0, 0);
     }
 }
