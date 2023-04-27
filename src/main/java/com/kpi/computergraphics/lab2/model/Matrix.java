@@ -38,7 +38,12 @@ public class Matrix {
         return new Matrix(vectorArray);
     }
 
-    public Vector3D toVectorVector() {
+    public static Matrix transformFromVector(Vector3D vector) {
+        double[][] vectorArray = {{vector.x()}, {vector.y()}, {vector.z()}, {0}};
+        return new Matrix(vectorArray);
+    }
+
+    public Vector3D toVector() {
         return new Vector3D(array[0][0], array[1][0], array[2][0]);
     }
 }
