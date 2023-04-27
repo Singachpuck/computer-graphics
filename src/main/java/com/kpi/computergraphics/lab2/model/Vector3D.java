@@ -44,6 +44,10 @@ public class Vector3D {
         return new Vector3D(-x, -y, -z);
     }
 
+    public double radsAngleWith(Vector3D vector) {
+        return Math.acos(dotProduct(vector)) / (length() * vector.length());
+    }
+
     public double x() {
         return x;
     }
