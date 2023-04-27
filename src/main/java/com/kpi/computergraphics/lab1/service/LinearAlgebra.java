@@ -1,11 +1,11 @@
-package com.kpi.computergraphics.service;
+package com.kpi.computergraphics.lab1.service;
 
-import com.kpi.computergraphics.model.base.Line;
-import com.kpi.computergraphics.model.base.Plane;
-import com.kpi.computergraphics.model.base.Point3D;
-import com.kpi.computergraphics.model.base.Vector3D;
-import com.kpi.computergraphics.model.object.Circle3D;
-import com.kpi.computergraphics.model.object.Sphere;
+import com.kpi.computergraphics.lab1.model.base.Line;
+import com.kpi.computergraphics.lab1.model.base.Plane;
+import com.kpi.computergraphics.lab1.model.base.Point3D;
+import com.kpi.computergraphics.lab1.model.base.Vector3D;
+import com.kpi.computergraphics.lab1.model.object.Circle3D;
+import com.kpi.computergraphics.lab1.model.object.Sphere;
 
 public class LinearAlgebra {
 
@@ -23,14 +23,14 @@ public class LinearAlgebra {
 
         final double b = 2 * lvSclpScalar;
 
-        final double D = b*b - 4*lvSquared*(sclpSquared - Math.pow(radius, 2));
+        final double D = b * b - 4 * lvSquared * (sclpSquared - Math.pow(radius, 2));
 
         if (D < 0) {
             return null;
         }
 
-        final double t1 = (-b + Math.sqrt(D)) / (2*lvSquared);
-        final double t2 = (-b - Math.sqrt(D)) / (2*lvSquared);
+        final double t1 = (-b + Math.sqrt(D)) / (2 * lvSquared);
+        final double t2 = (-b - Math.sqrt(D)) / (2 * lvSquared);
 
         final Point3D p1 = new Point3D();
         p1.setX((float) (ldv.getX() * t1 + lp.getX()));
@@ -42,7 +42,7 @@ public class LinearAlgebra {
         p2.setY((float) (ldv.getY() * t2 + lp.getY()));
         p2.setZ((float) (ldv.getZ() * t2 + lp.getZ()));
 
-        return new Point3D[] { p1, p2 };
+        return new Point3D[]{p1, p2};
     }
 
     public static Point3D[] intersects(Line line, Circle3D circle3D) {
@@ -72,7 +72,7 @@ public class LinearAlgebra {
         final float k = tmp1 / tmp2;
 
         final Point3D intersection = moveByVector(linePoint, invert(constantMultiply(lineDirection, k)));
-        return new Point3D[] { intersection };
+        return new Point3D[]{intersection};
     }
 
     public static boolean isDependant(Vector3D v1, Vector3D v2) {
@@ -100,7 +100,7 @@ public class LinearAlgebra {
     }
 
     public static Point3D moveByVectorAtDistance(Point3D p, Vector3D v, float distance) {
-        final float k = (float) (distance/Math.sqrt(Math.pow(v.getX(), 2) + Math.pow(v.getY(), 2) + Math.pow(v.getZ(), 2)));
+        final float k = (float) (distance / Math.sqrt(Math.pow(v.getX(), 2) + Math.pow(v.getY(), 2) + Math.pow(v.getZ(), 2)));
         return moveByVector(p, constantMultiply(v, k));
     }
 

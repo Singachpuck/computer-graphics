@@ -1,10 +1,10 @@
-package com.kpi.computergraphics.model;
+package com.kpi.computergraphics.lab1.model;
 
-import com.kpi.computergraphics.model.base.Line;
-import com.kpi.computergraphics.model.base.Point3D;
-import com.kpi.computergraphics.model.base.Vector3D;
-import com.kpi.computergraphics.model.object.Object3D;
-import com.kpi.computergraphics.service.LinearAlgebra;
+import com.kpi.computergraphics.lab1.model.base.Line;
+import com.kpi.computergraphics.lab1.model.base.Point3D;
+import com.kpi.computergraphics.lab1.model.base.Vector3D;
+import com.kpi.computergraphics.lab1.model.object.Object3D;
+import com.kpi.computergraphics.lab1.service.LinearAlgebra;
 import lombok.RequiredArgsConstructor;
 
 import java.util.AbstractMap.SimpleEntry;
@@ -43,7 +43,7 @@ public class SimpleScene {
         final Point3D screenCenter = LinearAlgebra.moveByVectorAtDistance(camera.getPlace(), camera.getDirection(), screen.getDistance());
         final float step = screenHeight / screenHeightPx;
         final Vector3D shiftWidth = LinearAlgebra.vectorMultiply(screen.getRotation(), camera.getDirection());
-        final Point3D screenBeginLeft = LinearAlgebra.moveByVectorAtDistance(screenCenter, shiftWidth, step*screenWidthPx / 2);
+        final Point3D screenBeginLeft = LinearAlgebra.moveByVectorAtDistance(screenCenter, shiftWidth, step * screenWidthPx / 2);
         final Point3D screenBegin = LinearAlgebra.moveByVectorAtDistance(screenBeginLeft, screen.getRotation(), screenHeight / 2);
         final Vector3D moveWidth = LinearAlgebra.invert(shiftWidth);
         final Vector3D moveHeight = LinearAlgebra.invert(screen.getRotation());
@@ -96,7 +96,7 @@ public class SimpleScene {
     }
 
     private float findScreenHeight() {
-        return 2*camera.getScreen().getDistance()*(float)Math.tan(camera.getFov() * Math.PI / 180);
+        return 2 * camera.getScreen().getDistance() * (float) Math.tan(camera.getFov() * Math.PI / 180);
     }
 
     private SimpleEntry<Object3D, Point3D> findClosestPoint(List<SimpleEntry<Object3D, Point3D>> points) {

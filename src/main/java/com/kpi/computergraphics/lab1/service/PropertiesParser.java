@@ -1,11 +1,11 @@
-package com.kpi.computergraphics.service;
+package com.kpi.computergraphics.lab1.service;
 
-import com.kpi.computergraphics.model.base.Plane;
-import com.kpi.computergraphics.model.base.Point3D;
-import com.kpi.computergraphics.model.base.Vector3D;
-import com.kpi.computergraphics.model.object.Circle3D;
-import com.kpi.computergraphics.model.object.Object3D;
-import com.kpi.computergraphics.model.object.Sphere;
+import com.kpi.computergraphics.lab1.model.base.Plane;
+import com.kpi.computergraphics.lab1.model.base.Point3D;
+import com.kpi.computergraphics.lab1.model.base.Vector3D;
+import com.kpi.computergraphics.lab1.model.object.Circle3D;
+import com.kpi.computergraphics.lab1.model.object.Object3D;
+import com.kpi.computergraphics.lab1.model.object.Sphere;
 
 import java.io.IOException;
 import java.util.*;

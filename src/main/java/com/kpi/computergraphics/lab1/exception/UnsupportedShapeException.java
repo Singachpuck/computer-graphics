@@ -1,4 +1,4 @@
-package com.kpi.computergraphics.exception;
+package com.kpi.computergraphics.lab1.exception;
 
 public class UnsupportedShapeException extends RuntimeException {
 

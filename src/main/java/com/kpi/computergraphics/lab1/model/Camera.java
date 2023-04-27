@@ -1,7 +1,7 @@
-package com.kpi.computergraphics.model;
+package com.kpi.computergraphics.lab1.model;
 
-import com.kpi.computergraphics.model.base.Point3D;
-import com.kpi.computergraphics.model.base.Vector3D;
+import com.kpi.computergraphics.lab1.model.base.Point3D;
+import com.kpi.computergraphics.lab1.model.base.Vector3D;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

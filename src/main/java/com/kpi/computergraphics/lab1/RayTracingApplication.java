@@ -1,7 +1,7 @@
-package com.kpi.computergraphics;
+package com.kpi.computergraphics.lab1;
 
-import com.kpi.computergraphics.model.SimpleScene;
-import com.kpi.computergraphics.service.PropertiesParser;
+import com.kpi.computergraphics.lab1.model.SimpleScene;
+import com.kpi.computergraphics.lab1.service.PropertiesParser;
 
 import java.io.IOException;
 import java.util.Map;

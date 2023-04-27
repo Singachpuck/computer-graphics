@@ -1,11 +1,12 @@
 package com.kpi.computergraphics.service;
 
-import com.kpi.computergraphics.model.base.Line;
-import com.kpi.computergraphics.model.base.Plane;
-import com.kpi.computergraphics.model.base.Point3D;
-import com.kpi.computergraphics.model.base.Vector3D;
-import com.kpi.computergraphics.model.object.Circle3D;
-import com.kpi.computergraphics.model.object.Sphere;
+import com.kpi.computergraphics.lab1.model.base.Line;
+import com.kpi.computergraphics.lab1.model.base.Plane;
+import com.kpi.computergraphics.lab1.model.base.Point3D;
+import com.kpi.computergraphics.lab1.model.base.Vector3D;
+import com.kpi.computergraphics.lab1.model.object.Circle3D;
+import com.kpi.computergraphics.lab1.model.object.Sphere;
+import com.kpi.computergraphics.lab1.service.LinearAlgebra;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
