@@ -1,4 +1,4 @@
-package com.kpi.computergraphics.lab2.model;
+package com.kpi.computergraphics.lab3.model;
 
 import lombok.AllArgsConstructor;
 

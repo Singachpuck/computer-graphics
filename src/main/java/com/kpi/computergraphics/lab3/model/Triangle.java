@@ -1,6 +1,6 @@
-package com.kpi.computergraphics.lab2.model;
+package com.kpi.computergraphics.lab3.model;
 
-import com.kpi.computergraphics.lab2.service.MatrixTransformation;
+import com.kpi.computergraphics.lab3.service.MatrixTransformation;
 
 import java.util.Optional;
 
