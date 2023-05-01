@@ -2,7 +2,7 @@ package com.kpi.computergraphics.lab3.model;
 
 import java.util.Optional;
 
-public class Plane {
+public class Plane implements Traceable {
 
     private final Vector3D normal;
     private final Vector3D position;
@@ -20,16 +20,14 @@ public class Plane {
         return position;
     }
 
-    public Optional<HitInfo> findIntersection(Ray ray) {
+    public Optional<IntersectionInfo> findIntersection(Ray ray) {
         var denominator = normal.dotProduct(ray.vector());
 
         if (Math.abs(denominator) == 0) {
             return Optional.empty();
         }
 
-        var length = position
-                .subtract(ray.start())
-                .dotProduct(normal) / denominator;
+        var length = position.subtract(ray.start()).dotProduct(normal) / denominator;
 
         if (length <= 0) {
             return Optional.empty();
@@ -38,6 +36,6 @@ public class Plane {
         var intersectPos = ray.start().add(ray.vector().multiply(length));
         var intersectNormal = denominator < 0 ? normal.negate() : normal;
 
-        return Optional.of(new HitInfo(intersectPos, intersectNormal, length));
+        return Optional.of(new IntersectionInfo(intersectPos, intersectNormal, length));
     }
 }

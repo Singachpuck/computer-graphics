@@ -7,6 +7,16 @@ public class Matrix {
 
     private double[][] array;
 
+    public static Matrix fromVector(Vector3D vector) {
+        double[][] vectorArray = {{vector.x()}, {vector.y()}, {vector.z()}};
+        return new Matrix(vectorArray);
+    }
+
+    public static Matrix transformFromVector(Vector3D vector) {
+        double[][] vectorArray = {{vector.x()}, {vector.y()}, {vector.z()}, {0}};
+        return new Matrix(vectorArray);
+    }
+
     public double get(int row, int col) {
         return array[row][col];
     }
@@ -31,16 +41,6 @@ public class Matrix {
         }
 
         return result;
-    }
-
-    public static Matrix fromVector(Vector3D vector) {
-        double[][] vectorArray = {{vector.x()}, {vector.y()}, {vector.z()}};
-        return new Matrix(vectorArray);
-    }
-
-    public static Matrix transformFromVector(Vector3D vector) {
-        double[][] vectorArray = {{vector.x()}, {vector.y()}, {vector.z()}, {0}};
-        return new Matrix(vectorArray);
     }
 
     public Vector3D toVector() {

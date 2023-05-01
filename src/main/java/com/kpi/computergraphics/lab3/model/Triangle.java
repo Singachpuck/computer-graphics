@@ -4,9 +4,9 @@ import com.kpi.computergraphics.lab3.service.MatrixTransformation;
 
 import java.util.Optional;
 
-public class Triangle {
+public class Triangle implements Traceable {
 
-    private final double eps = 0.00000001;
+    private static final double EPS = 0.00000001;
     private Vector3D vertex1;
     private Vector3D vertex2;
     private Vector3D vertex3;
@@ -23,7 +23,7 @@ public class Triangle {
         vertex3 = MatrixTransformation.transform(vertex3, transformMatrix);
     }
 
-    public Optional<HitInfo> findIntersection(Ray ray) {
+    public Optional<IntersectionInfo> findIntersection(Ray ray) {
         var E1 = vertex2.subtract(vertex1);
         var E2 = vertex3.subtract(vertex1);
         var T = ray.start().subtract(vertex1);
@@ -34,7 +34,7 @@ public class Triangle {
         var PE1 = P.dotProduct(E1);
 
         var length = Q.dotProduct(E2) / PE1;
-        if (length <= eps) {
+        if (length <= EPS) {
             return Optional.empty();
         }
 
@@ -57,7 +57,7 @@ public class Triangle {
         var intersectNormal = rawNormal.dotProduct(ray.vector()) < 0 ?
                 rawNormal.multiply(-1) : rawNormal;
 
-        return Optional.of(new HitInfo(intersectPos, intersectNormal, length));
+        return Optional.of(new IntersectionInfo(intersectPos, intersectNormal, length));
     }
 
     public Vector3D vertex1() {
