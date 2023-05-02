@@ -1,13 +1,17 @@
-package com.kpi.computergraphics.lab2.model;
+package com.kpi.computergraphics.lab3.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 @AllArgsConstructor
+@Getter
+@Setter
 public class Vector3D {
 
-    private double x;
-    private double y;
-    private double z;
+    private float x;
+    private float y;
+    private float z;
 
     public Vector3D add(Vector3D vector) {
         return new Vector3D(x + vector.x, y + vector.y, z + vector.z);
@@ -17,11 +21,11 @@ public class Vector3D {
         return new Vector3D(x - vector.x, y - vector.y, z - vector.z);
     }
 
-    public Vector3D multiply(double num) {
+    public Vector3D multiply(float num) {
         return new Vector3D(x * num, y * num, z * num);
     }
 
-    public double dotProduct(Vector3D vector) {
+    public float dotProduct(Vector3D vector) {
         return x * vector.x + y * vector.x + z * vector.z;
     }
 
@@ -32,8 +36,8 @@ public class Vector3D {
                 x * vector.y - y * vector.x);
     }
 
-    public double length() {
-        return Math.sqrt(x * x + y * y + z * z);
+    public float length() {
+        return (float) Math.sqrt(x * x + y * y + z * z);
     }
 
     public Vector3D normalize() {
@@ -42,29 +46,5 @@ public class Vector3D {
 
     public Vector3D negate() {
         return new Vector3D(-x, -y, -z);
-    }
-
-    public double x() {
-        return x;
-    }
-
-    public void x(double x) {
-        this.x = x;
-    }
-
-    public double y() {
-        return y;
-    }
-
-    public void y(double y) {
-        this.y = y;
-    }
-
-    public double z() {
-        return z;
-    }
-
-    public void z(double z) {
-        this.z = z;
     }
 }
