@@ -5,38 +5,45 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class Matrix {
 
-    private final float[][] table;
+    private double[][] array;
 
-    public float at(int i, int j) {
-        return table[i][j];
+    public static Matrix fromVector(Vector3D vector) {
+        double[][] vectorArray = {{vector.x()}, {vector.y()}, {vector.z()}};
+        return new Matrix(vectorArray);
     }
 
-    public Matrix multiply(Matrix m2) {
-        if (this.table.length != m2.table[0].length) {
-            throw new IllegalArgumentException("Matrices are not compatible");
+    public static Matrix transformFromVector(Vector3D vector) {
+        double[][] vectorArray = {{vector.x()}, {vector.y()}, {vector.z()}, {0}};
+        return new Matrix(vectorArray);
+    }
+
+    public double get(int row, int col) {
+        return array[row][col];
+    }
+
+    public Matrix multiply(Matrix secondMatrix) {
+        if (array[0].length != secondMatrix.array.length) {
+            throw new IllegalArgumentException("Matrix can't be multiplied, wrong dimensions");
         }
-        final Matrix result = new Matrix(new float[this.table.length][m2.table[0].length]);
-        for (int i = 0; i < this.table.length; i++) {
-            for (int j = 0; j < this.table[0].length; j++) {
-                float sum = 0;
-                for (int k = 0; k < m2.table.length; k++) {
-                    sum += this.table[i][k] * m2.table[k][j];
+
+        var result = new Matrix(new double[array.length][secondMatrix.array[0].length]);
+
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < secondMatrix.array[0].length; j++) {
+                double sum = 0;
+
+                for (int k = 0; k < array[0].length; k++) {
+                    sum += array[i][k] * secondMatrix.array[k][j];
                 }
-                result.table[i][j] = sum;
+
+                result.array[i][j] = sum;
             }
         }
+
         return result;
     }
 
-    public static Matrix fromVector(Vector3D vector) {
-        return new Matrix(new float[][] {
-                new float[]{vector.getX()},
-                new float[]{vector.getY()},
-                new float[]{vector.getZ()}
-        });
-    }
-
     public Vector3D toVector() {
-        return new Vector3D(this.table[0][0], this.table[1][0], this.table[2][0]);
+        return new Vector3D(array[0][0], array[1][0], array[2][0]);
     }
 }
