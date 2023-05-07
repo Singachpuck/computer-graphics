@@ -1,5 +1,7 @@
 package com.kpi.computergraphics.lab3.model;
 
+import com.kpi.computergraphics.lab3.model.base.Vector3D;
+
 import java.util.Optional;
 
 public class Plane implements Traceable {

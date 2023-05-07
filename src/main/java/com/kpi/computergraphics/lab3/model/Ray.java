@@ -1,5 +1,7 @@
 package com.kpi.computergraphics.lab3.model;
 
+import com.kpi.computergraphics.lab3.model.base.Vector3D;
+
 public class Ray {
     private final Vector3D start;
     private final Vector3D vector;

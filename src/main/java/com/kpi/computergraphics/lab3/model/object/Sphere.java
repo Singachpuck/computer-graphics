@@ -20,20 +20,20 @@ public class Sphere implements Traceable, TraceableTransformable<Sphere> {
     }
 
     public void transform(Matrix matrix) {
-        this.center = MatrixTransformation.transform(this.center, matrix);
-        this.radius = MatrixTransformation.transform(this.radius, matrix);
+        center = MatrixTransformation.transform(center, matrix);
+        radius = MatrixTransformation.transform(radius, matrix);
     }
 
     public Optional<IntersectionInfo> findIntersection(Ray ray) {
         double a = ray.vector().dotProduct(ray.vector());
         // o - c vector
-        Vector3D ocVector = ray.start().subtract(this.center);
+        Vector3D ocVector = ray.start().subtract(center);
         double b = 2 * ray.vector().dotProduct(ocVector);
-        double c = ocVector.dotProduct(ocVector) - this.radius * this.radius;
+        double c = ocVector.dotProduct(ocVector) - radius * radius;
         double D = b * b - 4 * a * c;
 
         if (D < 0) {
-            return null;
+            return Optional.empty();
         }
         double t1 = (-b + Math.sqrt(D)) / (2 * a);
         double t2 = (-b - Math.sqrt(D)) / (2 * a);
@@ -41,11 +41,11 @@ public class Sphere implements Traceable, TraceableTransformable<Sphere> {
         // or just t2 < 0 which means ray hits the sphere but starts inside it;
         // in both ways let's consider it as no hit
         if (t2 < 0) {
-            return null;
+            return Optional.empty();
         }
         double t = Math.min(t1, t2);
         if (t <= 0) {
-            return null;
+            return Optional.empty();
         }
         Vector3D pHit = ray.start().add(ray.vector().multiply(t));
         return Optional.of(new IntersectionInfo(pHit, this.center.subtract(pHit).normalize(), t));

@@ -1,6 +1,9 @@
 package com.kpi.computergraphics.lab3.model.image;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
 
 public class PixelWriter implements ImgWriter {
     public String format = String.valueOf(ImgFormat.PPM);
@@ -26,18 +29,18 @@ public class PixelWriter implements ImgWriter {
         try {
             out.write(header.getBytes());
 
-        InputStream pixels = imgBuffer.getPixels();
-        byte[] buffer = new byte[3];
-        int count = 0;
-        while (pixels.read(buffer) != -1) {
-            String pixel = String.format("%d %d %d\n", buffer[0], buffer[1], buffer[2]);
-            out.write(pixel.getBytes());
-            count++;
-        }
-        pixels.close();
-        out.close();
-        in.close();
-        } catch (IOException e){
+            InputStream pixels = imgBuffer.getPixels();
+            byte[] buffer = new byte[3];
+            int count = 0;
+            while (pixels.read(buffer) != -1) {
+                String pixel = String.format("%d %d %d\n", buffer[0], buffer[1], buffer[2]);
+                out.write(pixel.getBytes());
+                count++;
+            }
+            pixels.close();
+            out.close();
+            in.close();
+        } catch (IOException e) {
             //fix
         }
         return in;

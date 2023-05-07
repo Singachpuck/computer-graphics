@@ -4,5 +4,6 @@ import java.io.InputStream;
 
 public interface ImgWriter {
     String getFormat();
+
     InputStream write(ImgBuffer imgBuffer);
 }

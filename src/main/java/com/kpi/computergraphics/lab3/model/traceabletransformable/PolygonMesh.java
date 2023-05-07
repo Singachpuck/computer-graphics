@@ -8,7 +8,7 @@ import com.kpi.computergraphics.lab3.model.object.Triangle;
 import java.util.List;
 import java.util.Optional;
 
-public class PolygonMesh implements Traceable {
+public class PolygonMesh implements Traceable, Transformable {
 
     private final List<Triangle> triangles;
 

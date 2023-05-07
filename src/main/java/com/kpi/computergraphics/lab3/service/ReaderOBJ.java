@@ -1,5 +1,9 @@
 package com.kpi.computergraphics.lab3.service;
 
+import com.kpi.computergraphics.lab3.model.base.Vector3D;
+import com.kpi.computergraphics.lab3.model.object.Triangle;
+import com.kpi.computergraphics.lab3.model.traceabletransformable.Mesh;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,10 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import com.kpi.computergraphics.lab3.model.object.Triangle;
-import com.kpi.computergraphics.lab3.model.base.Vector3D;
-import com.kpi.computergraphics.lab3.model.traceabletransformable.Mesh;
 
 public class ReaderOBJ {
 

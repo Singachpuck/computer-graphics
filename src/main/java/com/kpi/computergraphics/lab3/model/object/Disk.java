@@ -22,27 +22,27 @@ public class Disk implements Traceable, TraceableTransformable<Disk> {
     }
 
     public void transform(Matrix matrix) {
-        this.center = MatrixTransformation.transform(this.center, matrix);
-        this.normal = MatrixTransformation.transform(this.normal, matrix);
+        center = MatrixTransformation.transform(center, matrix);
+        normal = MatrixTransformation.transform(normal, matrix);
     }
 
     public Optional<IntersectionInfo> findIntersection(Ray ray) {
-        double denominator = this.normal.dotProduct(ray.vector());
-        if (Math.abs(denominator) == 0) return null;
+        double denominator = normal.dotProduct(ray.vector());
+        if (Math.abs(denominator) == 0) return Optional.empty();
 
-        double t = this.center
+        double t = center
                 .subtract(ray.start())
-                .dotProduct(this.normal) / denominator;
+                .dotProduct(normal) / denominator;
 
-        if (t <= 0) return null;
+        if (t <= 0) return Optional.empty();
 
         Vector3D pHit = ray.start()
                 .add(ray.start().multiply(t));
         double distanceToCenter = pHit
-                .subtract(this.center).length();
+                .subtract(center).length();
 
-        if (distanceToCenter > this.radius) return null;
+        if (distanceToCenter > radius) return Optional.empty();
 
-        return Optional.of(new IntersectionInfo(pHit, denominator < 0 ? this.normal.multiply(-1) : this.normal, t));
+        return Optional.of(new IntersectionInfo(pHit, denominator < 0 ? normal.negate() : normal, t));
     }
 }

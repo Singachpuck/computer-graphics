@@ -19,7 +19,7 @@ public class Scene implements Transformable {
     }
 
     public void transform(Matrix matrix) {
-        for (TraceableTransformable object : this.objects) {
+        for (TraceableTransformable object : objects) {
             object.transform(matrix);
         }
     }

@@ -1,5 +1,7 @@
 package com.kpi.computergraphics.lab3.model;
 
+import com.kpi.computergraphics.lab3.model.base.Matrix;
+import com.kpi.computergraphics.lab3.model.base.Vector3D;
 import com.kpi.computergraphics.lab3.service.MatrixTransformation;
 
 import java.util.Optional;

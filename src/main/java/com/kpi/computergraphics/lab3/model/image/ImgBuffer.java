@@ -3,8 +3,8 @@ package com.kpi.computergraphics.lab3.model.image;
 import java.io.InputStream;
 
 public class ImgBuffer {
-    private final ImgInfo imgInfo;
     final InputStream pixels;
+    private final ImgInfo imgInfo;
 
     public ImgBuffer(ImgInfo imgInfo, InputStream pixels) {
         this.imgInfo = imgInfo;
