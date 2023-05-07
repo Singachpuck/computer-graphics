@@ -25,7 +25,6 @@ public class Sphere implements SceneObject {
 
     public Optional<IntersectionInfo> findIntersection(Ray ray) {
         double a = ray.vector().dotProduct(ray.vector());
-        // o - c vector
         Vector3D ocVector = ray.start().subtract(center);
         double b = 2 * ray.vector().dotProduct(ocVector);
         double c = ocVector.dotProduct(ocVector) - radius * radius;
@@ -36,17 +35,14 @@ public class Sphere implements SceneObject {
         }
         double t1 = (-b + Math.sqrt(D)) / (2 * a);
         double t2 = (-b - Math.sqrt(D)) / (2 * a);
-        // there are two options, t1 and t2 both < 0 which means ray hits the sphere but from behind,
-        // or just t2 < 0 which means ray hits the sphere but starts inside it;
-        // in both ways let's consider it as no hit
         if (t2 < 0) {
             return Optional.empty();
         }
-        double t = Math.min(t1, t2);
-        if (t <= 0) {
+        double length = Math.min(t1, t2);
+        if (length <= 0) {
             return Optional.empty();
         }
-        Vector3D pHit = ray.start().add(ray.vector().multiply(t));
-        return Optional.of(new IntersectionInfo(pHit, this.center.subtract(pHit).normalize(), t));
+        Vector3D pHit = ray.start().add(ray.vector().multiply(length));
+        return Optional.of(new IntersectionInfo(pHit, this.center.subtract(pHit).normalize(), length, this));
     }
 }

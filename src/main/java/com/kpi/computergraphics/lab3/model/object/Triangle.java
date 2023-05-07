@@ -62,7 +62,7 @@ public class Triangle implements SceneObject {
         var intersectNormal = rawNormal.dotProduct(ray.vector()) < 0 ?
                 rawNormal.multiply(-1) : rawNormal;
 
-        return Optional.of(new IntersectionInfo(intersectPos, intersectNormal, length));
+        return Optional.of(new IntersectionInfo(intersectPos, intersectNormal, length, this));
     }
 
     public Vector3D vertex1() {

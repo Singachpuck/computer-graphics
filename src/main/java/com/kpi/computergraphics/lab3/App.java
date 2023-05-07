@@ -51,28 +51,9 @@ public class App {
             scene.transform(MatrixTransformation.translateMatrix(-400, -500, 2000));
             mesh.transform(MatrixTransformation.translateMatrix(900, 100, 700));
             mesh.transform(MatrixTransformation.scaleMatrix(2, 2, 2));
-            // mesh.translate(0, 0, 1000);
-
-            // transforms relative to (0, 0, 0)
-            // look from below
-            // camera.translate(0, -1000, 0);
-            // camera.rotate(Math.PI / 6, 0, 0);
-
-            // look from the side
-            // camera.translate(-1000, 0, 0);
-            // camera.rotate(0, -Math.PI / 6, 0);
-
-            // look upside down
-            // camera.rotate(0, 0, Math.PI);
-
-            // look behind
-            // camera.rotate(0, Math.PI, 0);
 
             OutputStream output = new FileOutputStream(outputPath);
-            PixelRenderer renderer = new PixelRenderer(scene, output);
-            // transforms relative to the camera
-            // await renderer.render();
-            // look behind
+            ConsoleRenderer renderer = new ConsoleRenderer(scene, output);
             renderer.render();
         } catch (Exception e) {
             e.printStackTrace();
