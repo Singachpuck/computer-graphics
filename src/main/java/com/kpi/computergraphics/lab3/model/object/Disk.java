@@ -29,19 +29,19 @@ public class Disk implements SceneObject {
         double denominator = normal.dotProduct(ray.vector());
         if (Math.abs(denominator) == 0) return Optional.empty();
 
-        double t = center
+        double length = center
                 .subtract(ray.start())
                 .dotProduct(normal) / denominator;
 
-        if (t <= 0) return Optional.empty();
+        if (length <= 0) return Optional.empty();
 
         Vector3D pHit = ray.start()
-                .add(ray.start().multiply(t));
+                .add(ray.start().multiply(length));
         double distanceToCenter = pHit
                 .subtract(center).length();
 
         if (distanceToCenter > radius) return Optional.empty();
 
-        return Optional.of(new IntersectionInfo(pHit, denominator < 0 ? normal.negate() : normal, t));
+        return Optional.of(new IntersectionInfo(pHit, denominator < 0 ? normal.negate() : normal, length, this));
     }
 }

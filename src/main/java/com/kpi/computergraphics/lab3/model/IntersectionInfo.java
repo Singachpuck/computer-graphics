@@ -7,11 +7,13 @@ public class IntersectionInfo {
     private final Vector3D position;
     private final Vector3D normal;
     private final double length;
+    private final SceneObject object;
 
-    public IntersectionInfo(Vector3D position, Vector3D normal, double t) {
+    public IntersectionInfo(Vector3D position, Vector3D normal, double length, SceneObject object) {
         this.position = position;
         this.normal = normal;
-        this.length = t;
+        this.length = length;
+        this.object = object;
     }
 
     public Vector3D position() {
@@ -24,5 +26,9 @@ public class IntersectionInfo {
 
     public double length() {
         return length;
+    }
+
+    public SceneObject object() {
+        return object;
     }
 }

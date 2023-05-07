@@ -1,8 +1,8 @@
 package com.kpi.computergraphics.lab3.service;
 
 import com.kpi.computergraphics.lab3.model.base.Vector3D;
+import com.kpi.computergraphics.lab3.model.object.PolygonMesh;
 import com.kpi.computergraphics.lab3.model.object.Triangle;
-import com.kpi.computergraphics.lab3.model.traceabletransformable.Mesh;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 
 public class ReaderOBJ {
 
-    public static Mesh readStream(InputStream stream) throws IOException {
+    public static PolygonMesh readStream(InputStream stream) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
         String line;
         List<Vector3D> vertices = new ArrayList<>();
@@ -48,6 +48,6 @@ public class ReaderOBJ {
 
         reader.close();
 
-        return new Mesh(triangles);
+        return new PolygonMesh(triangles);
     }
 }
