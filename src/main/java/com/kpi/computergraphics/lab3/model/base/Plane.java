@@ -1,14 +1,15 @@
 package com.kpi.computergraphics.lab3.model.base;
 
 import com.kpi.computergraphics.lab3.model.IntersectionInfo;
-import com.kpi.computergraphics.lab3.model.traceabletransformable.Traceable;
+import com.kpi.computergraphics.lab3.model.SceneObject;
+import com.kpi.computergraphics.lab3.service.MatrixTransformation;
 
 import java.util.Optional;
 
-public class Plane implements Traceable {
+public class Plane implements SceneObject {
 
-    private final Vector3D normal;
-    private final Vector3D position;
+    private Vector3D normal;
+    private Vector3D position;
 
     public Plane(Vector3D normal, Vector3D center) {
         this.normal = normal;
@@ -41,4 +42,12 @@ public class Plane implements Traceable {
 
         return Optional.of(new IntersectionInfo(intersectPos, intersectNormal, length));
     }
+
+    @Override
+    public void transform(Matrix matrix) {
+        normal = MatrixTransformation.transform(normal, matrix);
+        position = MatrixTransformation.transform(position, matrix);
+    }
+
+
 }

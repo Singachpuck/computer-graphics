@@ -1,14 +1,14 @@
-package com.kpi.computergraphics.lab3.model.traceabletransformable;
+package com.kpi.computergraphics.lab3.model.object;
 
 import com.kpi.computergraphics.lab3.model.IntersectionInfo;
+import com.kpi.computergraphics.lab3.model.SceneObject;
 import com.kpi.computergraphics.lab3.model.base.Matrix;
 import com.kpi.computergraphics.lab3.model.base.Ray;
-import com.kpi.computergraphics.lab3.model.object.Triangle;
 
 import java.util.List;
 import java.util.Optional;
 
-public class PolygonMesh implements Traceable, Transformable {
+public class PolygonMesh implements SceneObject {
 
     private final List<Triangle> triangles;
 

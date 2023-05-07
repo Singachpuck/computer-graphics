@@ -1,11 +1,13 @@
 package com.kpi.computergraphics.lab3.model;
 
 import com.kpi.computergraphics.lab3.model.base.Matrix;
+import com.kpi.computergraphics.lab3.model.base.Ray;
 import com.kpi.computergraphics.lab3.model.base.Vector3D;
-import com.kpi.computergraphics.lab3.model.traceabletransformable.Transformable;
 import com.kpi.computergraphics.lab3.service.MatrixTransformation;
 
-public class Camera implements Transformable {
+import java.util.Optional;
+
+public class Camera implements SceneObject {
     public final double fov;
     public final int horizontalResolution;
     public final int verticalResolution;
@@ -46,6 +48,11 @@ public class Camera implements Transformable {
             rightVector = viewVector.crossProduct(new Vector3D(0, 0, 1)).normalize();
         }
         upVector = viewVector.crossProduct(rightVector).normalize();
+    }
+
+    @Override
+    public Optional<IntersectionInfo> findIntersection(Ray ray) {
+        return Optional.empty();
     }
 
     public void transform(Matrix matrix) {

@@ -1,16 +1,15 @@
 package com.kpi.computergraphics.lab3.model.object;
 
 import com.kpi.computergraphics.lab3.model.IntersectionInfo;
+import com.kpi.computergraphics.lab3.model.SceneObject;
 import com.kpi.computergraphics.lab3.model.base.Matrix;
 import com.kpi.computergraphics.lab3.model.base.Ray;
 import com.kpi.computergraphics.lab3.model.base.Vector3D;
-import com.kpi.computergraphics.lab3.model.traceabletransformable.Traceable;
-import com.kpi.computergraphics.lab3.model.traceabletransformable.Transformable;
 import com.kpi.computergraphics.lab3.service.MatrixTransformation;
 
 import java.util.Optional;
 
-public class Triangle implements Traceable, Transformable {
+public class Triangle implements SceneObject {
 
     private static final double EPS = 0.00000001;
     private Vector3D vertex1;
