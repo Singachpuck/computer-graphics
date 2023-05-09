@@ -1,9 +1,6 @@
 package com.kpi.computergraphics.lab3;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +10,7 @@ import com.kpi.computergraphics.lab3.model.SceneObject;
 import com.kpi.computergraphics.lab3.model.base.*;
 import com.kpi.computergraphics.lab3.model.object.*;
 import com.kpi.computergraphics.lab3.service.*;
+import com.kpi.computergraphics.lab3.service.renderer.OutputStreamRenderer;
 
 
 public class App {
@@ -39,22 +37,23 @@ public class App {
             InputStream input = new FileInputStream(objFilePath);
             PolygonMesh mesh = ReaderOBJ.readStream(input);
             System.out.println("Mesh loaded");
-            Vector3D cameraPosition = new Vector3D(0, 0, -2000);
+            Vector3D cameraPosition = new Vector3D(0, 0, -30);
             Vector3D cameraLookAt = new Vector3D(0, 0, 1);
             Camera camera = new Camera(cameraPosition, cameraLookAt, Math.PI / 3, 50, 50);
             Vector3D directionalLight = new Vector3D(-1, -1, 1);
             List<SceneObject> objects = new ArrayList<>();
-            objects.add(new Sphere(new Vector3D(0, 1100, 8000), 3500));
-            objects.add(mesh);
-            objects.add(new Disk(new Vector3D(-400, -1800, 8000), new Vector3D(0, 1, 0), 8000));
+            objects.add(new Sphere(new Vector3D(0, 0, 5), 3));
+//            objects.add(mesh);
+//            objects.add(new Disk(new Vector3D(0, 0, 0), new Vector3D(0, 0, -1), 10));
             Scene scene = new Scene(objects, camera, directionalLight);
-            scene.transform(MatrixTransformation.translateMatrix(-400, -500, 2000));
-            mesh.transform(MatrixTransformation.translateMatrix(900, 100, 700));
-            mesh.transform(MatrixTransformation.scaleMatrix(2, 2, 2));
+//            scene.transform(MatrixTransformation.translateMatrix(-400, -500, 2000));
+//            mesh.transform(MatrixTransformation.translateMatrix(900, 100, 700));
+//            mesh.transform(MatrixTransformation.scaleMatrix(2, 2, 2));
 
-            OutputStream output = new FileOutputStream(outputPath);
-            ConsoleRenderer renderer = new ConsoleRenderer(scene, output);
-            renderer.render();
+            try (OutputStream output = new BufferedOutputStream(new FileOutputStream(outputPath))) {
+                OutputStreamRenderer renderer = new OutputStreamRenderer(scene, output);
+                renderer.render();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

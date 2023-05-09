@@ -22,7 +22,7 @@ public class ReaderOBJ {
         List<Triangle> triangles = new ArrayList<>();
 
         Pattern vertexPattern = Pattern.compile("^v\\s([0-9.-]+)\\s([0-9.-]+)\\s([0-9.-]+)");
-        Pattern facePattern = Pattern.compile("^f(\\s\\d+(\\/\\d*)?(\\/\\d+)?) {1,3}");
+        Pattern facePattern = Pattern.compile("^f(\\s\\d+(/\\d*)?(/\\d+)?){1,3}");
 
         while ((line = reader.readLine()) != null) {
             Matcher vertexMatcher = vertexPattern.matcher(line);
@@ -35,10 +35,10 @@ public class ReaderOBJ {
 
             Matcher faceMatcher = facePattern.matcher(line);
             if (faceMatcher.find()) {
-                String[] parts = faceMatcher.group(1).trim().split("\\s+");
-                int v1Index = Integer.parseInt(parts[0].split("/")[0]) - 1;
-                int v2Index = Integer.parseInt(parts[1].split("/")[0]) - 1;
-                int v3Index = Integer.parseInt(parts[2].split("/")[0]) - 1;
+                String[] parts = faceMatcher.group(0).trim().split("\\s+");
+                int v1Index = Integer.parseInt(parts[1].split("/")[0]) - 1;
+                int v2Index = Integer.parseInt(parts[2].split("/")[0]) - 1;
+                int v3Index = Integer.parseInt(parts[3].split("/")[0]) - 1;
                 Vector3D v1 = vertices.get(v1Index);
                 Vector3D v2 = vertices.get(v2Index);
                 Vector3D v3 = vertices.get(v3Index);
