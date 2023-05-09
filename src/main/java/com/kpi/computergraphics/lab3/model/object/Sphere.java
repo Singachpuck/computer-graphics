@@ -24,10 +24,19 @@ public class Sphere implements SceneObject {
     }
 
     public Optional<IntersectionInfo> findIntersection(Ray ray) {
-        double a = ray.vector().dotProduct(ray.vector());
-        Vector3D ocVector = ray.start().subtract(center);
-        double b = 2 * ray.vector().dotProduct(ocVector);
-        double c = ocVector.dotProduct(ocVector) - radius * radius;
+        var first = ray.start();
+        var second = ray.start().add(ray.vector());
+
+        var a = (second.x() - first.x()) * (second.x() - first.x()) +
+                (second.y() - first.y()) * (second.y() - first.y()) +
+                (second.z() - first.z()) * (second.z() - first.z());
+        var b = 2*((second.x()-first.x())*(first.x()-center.x())+
+                (second.y()-first.y())*(first.y()-center.y())+
+                (second.z()-first.z())*(first.z()-center.z()));
+        var c = (first.x()-center.x())*(first.x()-center.x()) +
+                (first.y()-center.y())*(first.y()-center.y()) +
+                (first.z()-center.z())*(first.z()-center.z()) - radius*radius;
+
         double D = b * b - 4 * a * c;
 
         if (D < 0) {
