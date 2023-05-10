@@ -10,12 +10,11 @@ import com.kpi.computergraphics.lab3.model.SceneObject;
 import com.kpi.computergraphics.lab3.model.base.*;
 import com.kpi.computergraphics.lab3.model.object.*;
 import com.kpi.computergraphics.lab3.service.*;
-import com.kpi.computergraphics.lab3.service.renderer.OutputStreamRenderer;
 import com.kpi.computergraphics.lab3.service.renderer.PPMRenderer;
 import com.kpi.computergraphics.lab3.service.renderer.Renderer;
 
 
-public class App {
+public class RayCastingApp {
     public static void main(String[] args) {
         String objFilePath = "";
         String outputPath = "";
@@ -44,7 +43,7 @@ public class App {
             Camera camera = new Camera(cameraPosition, cameraLookAt, Math.PI / 3, 1920, 1080);
             Vector3D directionalLight = new Vector3D(-1, -1, 1);
             List<SceneObject> objects = new ArrayList<>();
-            objects.add(new Sphere(new Vector3D(2000, 1000, 8000), 6000));
+//            objects.add(new Sphere(new Vector3D(2000, 1000, 8000), 6000));
             objects.add(mesh);
             Scene scene = new Scene(objects, camera, directionalLight);
 

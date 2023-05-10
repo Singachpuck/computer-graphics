@@ -1,4 +1,4 @@
-package com.kpi.computergraphics.service;
+package com.kpi.computergraphics.lab1.service;
 
 import com.kpi.computergraphics.lab1.model.base.Line;
 import com.kpi.computergraphics.lab1.model.base.Plane;

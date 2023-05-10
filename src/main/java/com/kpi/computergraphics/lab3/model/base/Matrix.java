@@ -13,7 +13,7 @@ public class Matrix {
     }
 
     public static Matrix transformFromVector(Vector3D vector) {
-        double[][] vectorArray = {{vector.x()}, {vector.y()}, {vector.z()}, {0}};
+        double[][] vectorArray = {{vector.x()}, {vector.y()}, {vector.z()}, {1}};
         return new Matrix(vectorArray);
     }
 
@@ -41,6 +41,10 @@ public class Matrix {
         }
 
         return result;
+    }
+
+    public double[][] getArray() {
+        return array;
     }
 
     public Vector3D toVector() {
