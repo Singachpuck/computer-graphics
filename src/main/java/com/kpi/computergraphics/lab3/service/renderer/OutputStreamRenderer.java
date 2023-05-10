@@ -27,24 +27,22 @@ public class OutputStreamRenderer extends Renderer {
 
     @Override
     protected void intersect(IntersectionInfo intersection) {
-        final char toPrint;
+        char toPrint;
         if (intersection == null) {
             toPrint = ' ';
         } else {
             final double lightRate = intersection.normal().dotProduct(scene.light);
-
-            toPrint = '#';
-//            if (lightRate < 0) {
-//                toPrint = ' ';
-//            } else if (lightRate < 0.2) {
-//                toPrint = '.';
-//            } else if (lightRate < 0.5) {
-//                toPrint = '*';
-//            } else if (lightRate < 0.8) {
-//                toPrint = 'O';
-//            } else {
-//                toPrint = '#';
-//            }
+            if (lightRate < 0) {
+                toPrint = ' ';
+            } else if (lightRate < 0.2) {
+                toPrint = '.';
+            } else if (lightRate < 0.5) {
+                toPrint = '*';
+            } else if (lightRate < 0.8) {
+                toPrint = 'O';
+            } else {
+                toPrint = '#';
+            }
         }
 
         try {

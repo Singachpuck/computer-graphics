@@ -11,7 +11,7 @@ public class IntersectionInfo {
 
     public IntersectionInfo(Vector3D position, Vector3D normal, double length, SceneObject object) {
         this.position = position;
-        this.normal = normal;
+        this.normal = normal.normalize();
         this.length = length;
         this.object = object;
     }

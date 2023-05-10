@@ -22,7 +22,7 @@ public class Vector3D {
     }
 
     public double dotProduct(Vector3D vector) {
-        return x * vector.x + y * vector.x + z * vector.z;
+        return x * vector.x + y * vector.y + z * vector.z;
     }
 
     public Vector3D crossProduct(Vector3D vector) {
@@ -70,5 +70,14 @@ public class Vector3D {
 
     public void z(double z) {
         this.z = z;
+    }
+
+    @Override
+    public String toString() {
+        return "Vector3D{" +
+                "x=" + x +
+                ", y=" + y +
+                ", z=" + z +
+                '}';
     }
 }
