@@ -11,6 +11,8 @@ import com.kpi.computergraphics.lab3.model.base.*;
 import com.kpi.computergraphics.lab3.model.object.*;
 import com.kpi.computergraphics.lab3.service.*;
 import com.kpi.computergraphics.lab3.service.renderer.OutputStreamRenderer;
+import com.kpi.computergraphics.lab3.service.renderer.PPMRenderer;
+import com.kpi.computergraphics.lab3.service.renderer.Renderer;
 
 
 public class App {
@@ -37,21 +39,22 @@ public class App {
             InputStream input = new FileInputStream(objFilePath);
             PolygonMesh mesh = ReaderOBJ.readStream(input);
             System.out.println("Mesh loaded");
-            Vector3D cameraPosition = new Vector3D(0, 0, -30);
+            Vector3D cameraPosition = new Vector3D(0, 0, -2000);
             Vector3D cameraLookAt = new Vector3D(0, 0, 1);
-            Camera camera = new Camera(cameraPosition, cameraLookAt, Math.PI / 3, 50, 50);
+            Camera camera = new Camera(cameraPosition, cameraLookAt, Math.PI / 3, 1920, 1080);
             Vector3D directionalLight = new Vector3D(-1, -1, 1);
             List<SceneObject> objects = new ArrayList<>();
-            objects.add(new Sphere(new Vector3D(0, 0, 5), 3));
-//            objects.add(mesh);
-//            objects.add(new Disk(new Vector3D(0, 0, 0), new Vector3D(0, 0, -1), 10));
+            objects.add(new Sphere(new Vector3D(2000, 1000, 8000), 6000));
+            objects.add(mesh);
             Scene scene = new Scene(objects, camera, directionalLight);
-//            scene.transform(MatrixTransformation.translateMatrix(-400, -500, 2000));
-//            mesh.transform(MatrixTransformation.translateMatrix(900, 100, 700));
-//            mesh.transform(MatrixTransformation.scaleMatrix(2, 2, 2));
+
+            // Transformations
+//            camera.transform(MatrixTransformation.rotateMatrix(Math.PI / 6, 0, 0));
+//            mesh.transform(MatrixTransformation.scaleMatrix(1, 1, 2));
 
             try (OutputStream output = new BufferedOutputStream(new FileOutputStream(outputPath))) {
-                OutputStreamRenderer renderer = new OutputStreamRenderer(scene, output);
+//                Renderer renderer = new OutputStreamRenderer(scene, output);
+                Renderer renderer = new PPMRenderer(scene, output);
                 renderer.render();
             }
         } catch (Exception e) {
