@@ -19,7 +19,7 @@ public class Camera implements SceneObject {
     public Vector3D viewVector;
     public Matrix cameraTransformMatrix;
 
-    public Camera(Vector3D focalPoint, Vector3D viewVector, double fov, int horizontalResolution,
+    Camera(Vector3D focalPoint, Vector3D viewVector, double fov, int horizontalResolution,
                   int verticalResolution, Matrix cameraTransformMatrix) {
         this.focalPoint = focalPoint;
         this.viewVector = viewVector;
@@ -36,7 +36,7 @@ public class Camera implements SceneObject {
         upVector = viewVector.crossProduct(rightVector).normalize();
     }
 
-    public Camera(Vector3D focalPoint, Vector3D viewVector, double fov, int horizontalResolution,
+    Camera(Vector3D focalPoint, Vector3D viewVector, double fov, int horizontalResolution,
                   int verticalResolution) {
         this.focalPoint = focalPoint;
         this.viewVector = viewVector;

@@ -13,7 +13,7 @@ import java.util.Optional;
 public abstract class Renderer {
     public final Scene scene;
 
-    public Renderer(Scene scene) {
+    protected Renderer(Scene scene) {
         this.scene = scene;
     }
 

@@ -11,7 +11,7 @@ public class Scene {
     public Camera camera;
     public Vector3D light;
 
-    public Scene(List<SceneObject> objects, Camera camera, Vector3D light) {
+    Scene(List<SceneObject> objects, Camera camera, Vector3D light) {
         this.objects = objects;
         this.camera = camera;
         this.light = light.normalize();

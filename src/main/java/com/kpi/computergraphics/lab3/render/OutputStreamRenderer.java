@@ -6,11 +6,11 @@ import com.kpi.computergraphics.lab3.scene.Scene;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class OutputStreamRenderer extends Renderer {
+class OutputStreamRenderer extends Renderer {
 
     private final OutputStream os;
 
-    public OutputStreamRenderer(Scene scene, OutputStream os) {
+    OutputStreamRenderer(Scene scene, OutputStream os) {
         super(scene);
         this.os = os;
     }

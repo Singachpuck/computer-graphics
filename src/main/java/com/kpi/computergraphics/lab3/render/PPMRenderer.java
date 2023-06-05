@@ -6,11 +6,11 @@ import com.kpi.computergraphics.lab3.scene.Scene;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class PPMRenderer extends Renderer {
+class PPMRenderer extends Renderer {
 
     private final OutputStream os;
 
-    public PPMRenderer(Scene scene, OutputStream os) {
+    PPMRenderer(Scene scene, OutputStream os) {
         super(scene);
         this.os = os;
     }
