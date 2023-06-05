@@ -53,22 +53,32 @@ public class SceneFactory {
     }
 
     /**
-     * Returns preset scene or create default scene from provided OBJ file.
+     * Returns preset scene by name.
      *
-     * @param sceneOrFileName name of the scene or single mesh file
+     * @param sceneName name of the preset scene
+     * @return preset scene
+     */
+    public Scene get(String sceneName) {
+        if (scenes.containsKey(sceneName)) {
+            return scenes.get(sceneName);
+        }
+        throw new IllegalStateException("No such scene found");
+    }
+
+    /**
+     * Create default scene from provided OBJ file.
+     *
+     * @param fileName name of OBJ file
      * @return configured scene
      */
-    public Scene scene(String sceneOrFileName) {
-        if (scenes.containsKey(sceneOrFileName)) {
-            return scenes.get(sceneOrFileName);
-        }
+    public Scene build(String fileName) {
         try {
-            InputStream input = new FileInputStream("src/main/resources/" + sceneOrFileName);
+            InputStream input = new FileInputStream("src/main/resources/" + fileName);
             PolygonMesh mesh = readStream(input);
             List<SceneObject> objects = List.of(mesh);
             return new Scene(objects, defaultCamera, defaultLight);
         } catch (Exception e) {
-            throw new IllegalStateException("No such scene or file found");
+            throw new IllegalStateException("No such file found");
         }
     }
 }
