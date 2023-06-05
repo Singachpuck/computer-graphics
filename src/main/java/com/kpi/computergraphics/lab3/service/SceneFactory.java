@@ -20,11 +20,13 @@ import static com.kpi.computergraphics.lab3.service.ReaderOBJ.readStream;
 public class SceneFactory {
     private final Map<String, Scene> scenes = new HashMap<>();
 
+    private final Camera defaultCamera = new Camera(
+            new Vector3D(0, 0, -2000),
+            new Vector3D(0, 0, 1),
+            Math.PI / 3, 800, 600);
+    private final Vector3D defaultLight = new Vector3D(-1, -1, 1);
+
     public SceneFactory() {
-        Vector3D cameraPosition = new Vector3D(0, 0, -2000);
-        Vector3D cameraLookAt = new Vector3D(0, 0, 1);
-        Camera camera = new Camera(cameraPosition, cameraLookAt, Math.PI / 3, 800, 600);
-        Vector3D directionalLight = new Vector3D(-1, -1, 1);
         try {
             InputStream input = new FileInputStream("src/main/resources/cow.obj");
             PolygonMesh cowMesh = readStream(input);
@@ -32,7 +34,7 @@ public class SceneFactory {
             List<SceneObject> cowOnSphereObjects = new ArrayList<>();
             cowOnSphereObjects.add(cowMesh);
             cowOnSphereObjects.add(sphere);
-            var cowOnSphereScene = new Scene(cowOnSphereObjects, camera, directionalLight);
+            var cowOnSphereScene = new Scene(cowOnSphereObjects, defaultCamera, defaultLight);
             scenes.put("cow_on_sphere", cowOnSphereScene);
 
             Triangle triangle = new Triangle(
@@ -43,19 +45,30 @@ public class SceneFactory {
             List<SceneObject> geometryObjects = new ArrayList<>();
             geometryObjects.add(triangle);
             geometryObjects.add(sphere);
-            var geometryScene = new Scene(geometryObjects, camera, directionalLight);
+            var geometryScene = new Scene(geometryObjects, defaultCamera, defaultLight);
             scenes.put("geometry", geometryScene);
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public Scene getScene(String sceneName) {
-        if (!scenes.containsKey(sceneName)) {
-            throw new IllegalStateException("Scene '" + sceneName + "' not found");
+    /**
+     * Returns preset scene or create default scene from provided OBJ file.
+     *
+     * @param sceneOrFileName name of the scene or single mesh file
+     * @return configured scene
+     */
+    public Scene scene(String sceneOrFileName) {
+        if (scenes.containsKey(sceneOrFileName)) {
+            return scenes.get(sceneOrFileName);
         }
-        return scenes.get(sceneName);
+        try {
+            InputStream input = new FileInputStream("src/main/resources/" + sceneOrFileName);
+            PolygonMesh mesh = readStream(input);
+            List<SceneObject> objects = List.of(mesh);
+            return new Scene(objects, defaultCamera, defaultLight);
+        } catch (Exception e) {
+            throw new IllegalStateException("No such scene or file found");
+        }
     }
 }
