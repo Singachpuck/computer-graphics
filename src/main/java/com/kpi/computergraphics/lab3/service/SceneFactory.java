@@ -3,6 +3,7 @@ package com.kpi.computergraphics.lab3.service;
 import com.kpi.computergraphics.lab3.model.Camera;
 import com.kpi.computergraphics.lab3.model.Scene;
 import com.kpi.computergraphics.lab3.model.SceneObject;
+import com.kpi.computergraphics.lab3.model.SceneObjectsFactory;
 import com.kpi.computergraphics.lab3.model.base.Vector3D;
 import com.kpi.computergraphics.lab3.model.object.PolygonMesh;
 import com.kpi.computergraphics.lab3.model.object.Sphere;
@@ -15,32 +16,34 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.kpi.computergraphics.lab3.service.ReaderOBJ.readStream;
+import static com.kpi.computergraphics.lab3.model.ReaderOBJ.readStream;
 
 public class SceneFactory {
     private final Map<String, Scene> scenes = new HashMap<>();
 
-    private final Camera defaultCamera = new Camera(
-            new Vector3D(0, 0, -2000),
-            new Vector3D(0, 0, 1),
-            Math.PI / 3, 800, 600);
-    private final Vector3D defaultLight = new Vector3D(-1, -1, 1);
+    private final Camera defaultCamera;
+    private final Vector3D defaultLight;
 
-    public SceneFactory() {
+    public SceneFactory(SceneObjectsFactory objectsFactory) {
+        defaultCamera = objectsFactory.camera(
+                new Vector3D(0, 0, -2000),
+                new Vector3D(0, 0, 1),
+                Math.PI / 3, 800, 600);
+        defaultLight = objectsFactory.vector(-1, -1, 1);
         try {
             InputStream input = new FileInputStream("src/main/resources/cow.obj");
             PolygonMesh cowMesh = readStream(input);
-            Sphere sphere = new Sphere(new Vector3D(0, -500, 200), 700);
+            Sphere sphere = objectsFactory.sphere(0, -500, 200, 700);
             List<SceneObject> cowOnSphereObjects = new ArrayList<>();
             cowOnSphereObjects.add(cowMesh);
             cowOnSphereObjects.add(sphere);
             var cowOnSphereScene = new Scene(cowOnSphereObjects, defaultCamera, defaultLight);
             scenes.put("cow_on_sphere", cowOnSphereScene);
 
-            Triangle triangle = new Triangle(
-                    new Vector3D(0, 200, 200),
-                    new Vector3D(-200, 400, 205),
-                    new Vector3D(200, 400, 195)
+            Triangle triangle = objectsFactory.triangle(
+                    objectsFactory.vector(0, 200, 200),
+                    objectsFactory.vector(-200, 400, 205),
+                    objectsFactory.vector(200, 400, 195)
             );
             List<SceneObject> geometryObjects = new ArrayList<>();
             geometryObjects.add(triangle);

@@ -1,4 +1,4 @@
-package com.kpi.computergraphics.lab3.service;
+package com.kpi.computergraphics.lab3.model;
 
 import com.kpi.computergraphics.lab3.model.base.Vector3D;
 import com.kpi.computergraphics.lab3.model.object.PolygonMesh;

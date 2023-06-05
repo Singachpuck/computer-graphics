@@ -11,16 +11,19 @@ import java.io.OutputStream;
 
 public class RayCastingApp {
     private final ArgumentsParser argumentsParser;
+    private final SceneFactory sceneFactory;
     private final RendererFactory rendererFactory;
 
-    public RayCastingApp(ArgumentsParser argumentsParser, RendererFactory rendererFactory) {
+    public RayCastingApp(ArgumentsParser argumentsParser,
+                         SceneFactory sceneFactory,
+                         RendererFactory rendererFactory) {
         this.argumentsParser = argumentsParser;
+        this.sceneFactory = sceneFactory;
         this.rendererFactory = rendererFactory;
     }
 
     public void start(String[] args) {
         var arguments = argumentsParser.parse(args);
-        SceneFactory sceneFactory = new SceneFactory();
         Scene scene;
         if (arguments.scene().isPresent()) {
             scene = sceneFactory.get(arguments.scene().get());

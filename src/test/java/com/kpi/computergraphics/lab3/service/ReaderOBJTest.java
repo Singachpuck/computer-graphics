@@ -1,5 +1,6 @@
 package com.kpi.computergraphics.lab3.service;
 
+import com.kpi.computergraphics.lab3.model.ReaderOBJ;
 import com.kpi.computergraphics.lab3.model.base.Ray;
 import com.kpi.computergraphics.lab3.model.base.Vector3D;
 import com.kpi.computergraphics.lab3.model.object.PolygonMesh;

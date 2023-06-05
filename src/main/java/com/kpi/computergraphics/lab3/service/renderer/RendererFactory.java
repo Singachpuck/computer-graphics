@@ -1,7 +1,6 @@
 package com.kpi.computergraphics.lab3.service.renderer;
 
 import com.kpi.computergraphics.lab3.model.Scene;
-import com.kpi.computergraphics.lab3.service.renderer.Renderer;
 
 import java.io.OutputStream;
 
