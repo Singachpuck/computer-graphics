@@ -1,4 +1,4 @@
-package com.kpi.computergraphics.lab3.service;
+package com.kpi.computergraphics.lab3;
 
 import java.util.Optional;
 

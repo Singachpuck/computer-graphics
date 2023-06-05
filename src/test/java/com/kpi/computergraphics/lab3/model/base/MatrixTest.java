@@ -1,5 +1,7 @@
 package com.kpi.computergraphics.lab3.model.base;
 
+import com.kpi.computergraphics.lab3.base.Matrix;
+import com.kpi.computergraphics.lab3.base.Vector3D;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

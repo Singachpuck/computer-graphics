@@ -1,9 +1,9 @@
 package com.kpi.computergraphics.lab3.service;
 
-import com.kpi.computergraphics.lab3.model.ReaderOBJ;
-import com.kpi.computergraphics.lab3.model.base.Ray;
-import com.kpi.computergraphics.lab3.model.base.Vector3D;
-import com.kpi.computergraphics.lab3.model.object.PolygonMesh;
+import com.kpi.computergraphics.lab3.scene.ReaderOBJ;
+import com.kpi.computergraphics.lab3.base.Ray;
+import com.kpi.computergraphics.lab3.base.Vector3D;
+import com.kpi.computergraphics.lab3.scene.objects.PolygonMesh;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

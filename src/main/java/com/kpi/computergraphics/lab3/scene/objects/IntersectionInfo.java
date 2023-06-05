@@ -1,6 +1,6 @@
-package com.kpi.computergraphics.lab3.model;
+package com.kpi.computergraphics.lab3.scene.objects;
 
-import com.kpi.computergraphics.lab3.model.base.Vector3D;
+import com.kpi.computergraphics.lab3.base.Vector3D;
 
 public class IntersectionInfo {
 

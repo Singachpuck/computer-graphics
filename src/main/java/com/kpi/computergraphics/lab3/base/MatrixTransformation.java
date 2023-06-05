@@ -1,9 +1,6 @@
-package com.kpi.computergraphics.lab3.service;
+package com.kpi.computergraphics.lab3.base;
 
-import com.kpi.computergraphics.lab3.model.base.Matrix;
-import com.kpi.computergraphics.lab3.model.base.Vector3D;
-
-import static com.kpi.computergraphics.lab3.model.base.Matrix.transformFromVector;
+import static com.kpi.computergraphics.lab3.base.Matrix.transformFromVector;
 
 public class MatrixTransformation {
     public static Matrix translateMatrix(double x, double y, double z) {

@@ -1,8 +1,7 @@
-package com.kpi.computergraphics.lab3.model.base;
+package com.kpi.computergraphics.lab3.base;
 
-import com.kpi.computergraphics.lab3.model.IntersectionInfo;
-import com.kpi.computergraphics.lab3.model.SceneObject;
-import com.kpi.computergraphics.lab3.service.MatrixTransformation;
+import com.kpi.computergraphics.lab3.scene.objects.IntersectionInfo;
+import com.kpi.computergraphics.lab3.scene.objects.SceneObject;
 
 import java.util.Optional;
 

@@ -1,7 +1,7 @@
-package com.kpi.computergraphics.lab3.model;
+package com.kpi.computergraphics.lab3.scene.objects;
 
-import com.kpi.computergraphics.lab3.model.base.Matrix;
-import com.kpi.computergraphics.lab3.model.base.Ray;
+import com.kpi.computergraphics.lab3.base.Matrix;
+import com.kpi.computergraphics.lab3.base.Ray;
 
 import java.util.Optional;
 

@@ -1,8 +1,8 @@
-package com.kpi.computergraphics.lab3.model;
+package com.kpi.computergraphics.lab3.scene;
 
-import com.kpi.computergraphics.lab3.model.base.Vector3D;
-import com.kpi.computergraphics.lab3.model.object.PolygonMesh;
-import com.kpi.computergraphics.lab3.model.object.Triangle;
+import com.kpi.computergraphics.lab3.base.Vector3D;
+import com.kpi.computergraphics.lab3.scene.objects.PolygonMesh;
+import com.kpi.computergraphics.lab3.scene.objects.Triangle;
 
 import java.io.BufferedReader;
 import java.io.IOException;

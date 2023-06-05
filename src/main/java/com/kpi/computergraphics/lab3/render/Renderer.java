@@ -1,11 +1,11 @@
-package com.kpi.computergraphics.lab3.service.renderer;
+package com.kpi.computergraphics.lab3.render;
 
-import com.kpi.computergraphics.lab3.model.Camera;
-import com.kpi.computergraphics.lab3.model.IntersectionInfo;
-import com.kpi.computergraphics.lab3.model.Scene;
-import com.kpi.computergraphics.lab3.model.SceneObject;
-import com.kpi.computergraphics.lab3.model.base.Ray;
-import com.kpi.computergraphics.lab3.model.base.Vector3D;
+import com.kpi.computergraphics.lab3.scene.Camera;
+import com.kpi.computergraphics.lab3.scene.objects.IntersectionInfo;
+import com.kpi.computergraphics.lab3.scene.Scene;
+import com.kpi.computergraphics.lab3.scene.objects.SceneObject;
+import com.kpi.computergraphics.lab3.base.Ray;
+import com.kpi.computergraphics.lab3.base.Vector3D;
 
 import java.util.List;
 import java.util.Optional;
