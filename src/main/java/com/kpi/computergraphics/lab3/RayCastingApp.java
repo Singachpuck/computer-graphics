@@ -2,14 +2,12 @@ package com.kpi.computergraphics.lab3;
 
 import com.kpi.computergraphics.lab3.model.Scene;
 import com.kpi.computergraphics.lab3.service.ArgumentsParser;
-import com.kpi.computergraphics.lab3.service.RendererFactory;
 import com.kpi.computergraphics.lab3.service.SceneFactory;
-import com.kpi.computergraphics.lab3.service.renderer.PPMRenderer;
+import com.kpi.computergraphics.lab3.service.renderer.RendererFactory;
 
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-
 
 public class RayCastingApp {
     private final ArgumentsParser argumentsParser;
@@ -30,7 +28,7 @@ public class RayCastingApp {
             scene = sceneFactory.build(arguments.source().get());
         }
         try (OutputStream output = new BufferedOutputStream(new FileOutputStream("src/main/resources/" + arguments.output()))) {
-            rendererFactory.create(PPMRenderer.class, scene, output).render();
+            rendererFactory.create(scene, output).render();
         } catch (Exception e) {
             e.printStackTrace();
         }
