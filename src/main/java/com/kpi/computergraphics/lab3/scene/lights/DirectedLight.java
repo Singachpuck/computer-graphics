@@ -28,8 +28,8 @@ public class DirectedLight {
         // need to add Colour's to IntersectionInfo and scene.objects' findIntersection() methods
         return new Colour(
                 (intersection.colour().red() * colour.red() * multiplier) / Math.pow(d, 2),
-                (intersection.colour().green() * colour.green() * multiplier) / Math.pow(d, 2,
-                (intersection.colour().blue() * colour.blue() * multiplier) / Math.pow(d, 2
+                (intersection.colour().green() * colour.green() * multiplier) / Math.pow(d, 2),
+                (intersection.colour().blue() * colour.blue() * multiplier) / Math.pow(d, 2)
         );
     }
 
