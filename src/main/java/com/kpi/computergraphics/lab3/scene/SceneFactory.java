@@ -2,8 +2,9 @@ package com.kpi.computergraphics.lab3.scene;
 
 import com.kpi.computergraphics.lab3.base.Color;
 import com.kpi.computergraphics.lab3.base.Vector3D;
-import com.kpi.computergraphics.lab3.scene.light.DirectLight;
 import com.kpi.computergraphics.lab3.scene.light.AmbientLight;
+import com.kpi.computergraphics.lab3.scene.light.DirectLight;
+import com.kpi.computergraphics.lab3.scene.light.DotLight;
 import com.kpi.computergraphics.lab3.scene.light.Light;
 import com.kpi.computergraphics.lab3.scene.objects.PolygonMesh;
 import com.kpi.computergraphics.lab3.scene.objects.SceneObject;
@@ -49,6 +50,11 @@ public class SceneFactory {
                 new Color(0.3, 1, 0.75),
                 0.5
         );
+        var dotLight = new DotLight(
+                new Vector3D(0, 300, 200),
+                new Color(0.3, 1, 0.75),
+                1000
+        );
         try {
             InputStream input = new FileInputStream("src/main/resources/cow.obj");
             PolygonMesh cowMesh = readStream(input);
@@ -56,7 +62,7 @@ public class SceneFactory {
             List<SceneObject> cowOnSphereObjects = new ArrayList<>();
             cowOnSphereObjects.add(cowMesh);
             cowOnSphereObjects.add(sphere);
-            var cowOnSphereScene = new Scene(cowOnSphereObjects, defaultCamera, List.of(defaultLight,envLight));
+            var cowOnSphereScene = new Scene(cowOnSphereObjects, defaultCamera, List.of(defaultLight, dotLight));
             scenes.put("cow_on_sphere", cowOnSphereScene);
 
             Triangle triangle = new Triangle(
