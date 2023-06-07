@@ -1,9 +1,6 @@
 package com.kpi.computergraphics.lab3.scene.objects;
 
-import com.kpi.computergraphics.lab3.base.Matrix;
-import com.kpi.computergraphics.lab3.base.Ray;
-import com.kpi.computergraphics.lab3.base.Vector3D;
-import com.kpi.computergraphics.lab3.base.MatrixTransformation;
+import com.kpi.computergraphics.lab3.base.*;
 
 import java.util.Optional;
 
@@ -28,12 +25,12 @@ public class Sphere implements SceneObject {
         var a = (second.x() - first.x()) * (second.x() - first.x()) +
                 (second.y() - first.y()) * (second.y() - first.y()) +
                 (second.z() - first.z()) * (second.z() - first.z());
-        var b = 2*((second.x()-first.x())*(first.x()-center.x())+
-                (second.y()-first.y())*(first.y()-center.y())+
-                (second.z()-first.z())*(first.z()-center.z()));
-        var c = (first.x()-center.x())*(first.x()-center.x()) +
-                (first.y()-center.y())*(first.y()-center.y()) +
-                (first.z()-center.z())*(first.z()-center.z()) - radius*radius;
+        var b = 2 * ((second.x() - first.x()) * (first.x() - center.x()) +
+                (second.y() - first.y()) * (first.y() - center.y()) +
+                (second.z() - first.z()) * (first.z() - center.z()));
+        var c = (first.x() - center.x()) * (first.x() - center.x()) +
+                (first.y() - center.y()) * (first.y() - center.y()) +
+                (first.z() - center.z()) * (first.z() - center.z()) - radius * radius;
 
         double D = b * b - 4 * a * c;
 
@@ -50,6 +47,6 @@ public class Sphere implements SceneObject {
             return Optional.empty();
         }
         Vector3D pHit = ray.start().add(ray.vector().multiply(length));
-        return Optional.of(new IntersectionInfo(pHit, this.center.subtract(pHit).normalize(), length, this));
+        return Optional.of(new IntersectionInfo(pHit, this.center.subtract(pHit).normalize(), length, this, new Color(1, 1, 1)));
     }
 }

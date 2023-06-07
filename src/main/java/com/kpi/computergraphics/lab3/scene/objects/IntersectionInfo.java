@@ -9,7 +9,7 @@ public class IntersectionInfo {
     private final Vector3D normal;
     private final double length;
     private final SceneObject object;
-    private final Color color;
+    private Color color;
 
     public IntersectionInfo(Vector3D position, Vector3D normal, double length, SceneObject object, Color color) {
         this.position = position;
@@ -37,5 +37,9 @@ public class IntersectionInfo {
 
     public Color color() {
         return color;
+    }
+
+    public void color(Color color) {
+        this.color = color;
     }
 }

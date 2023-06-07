@@ -1,9 +1,6 @@
 package com.kpi.computergraphics.lab3.scene.objects;
 
-import com.kpi.computergraphics.lab3.base.Matrix;
-import com.kpi.computergraphics.lab3.base.Ray;
-import com.kpi.computergraphics.lab3.base.Vector3D;
-import com.kpi.computergraphics.lab3.base.MatrixTransformation;
+import com.kpi.computergraphics.lab3.base.*;
 
 import java.util.Optional;
 
@@ -40,6 +37,6 @@ public class Disk implements SceneObject {
 
         if (distanceToCenter > radius) return Optional.empty();
 
-        return Optional.of(new IntersectionInfo(pHit, denominator < 0 ? normal.negate() : normal, length, this));
+        return Optional.of(new IntersectionInfo(pHit, denominator < 0 ? normal.negate() : normal, length, this, new Color(1, 1, 1)));
     }
 }

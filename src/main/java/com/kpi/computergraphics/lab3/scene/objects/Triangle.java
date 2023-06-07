@@ -1,9 +1,6 @@
 package com.kpi.computergraphics.lab3.scene.objects;
 
-import com.kpi.computergraphics.lab3.base.Matrix;
-import com.kpi.computergraphics.lab3.base.Ray;
-import com.kpi.computergraphics.lab3.base.Vector3D;
-import com.kpi.computergraphics.lab3.base.MatrixTransformation;
+import com.kpi.computergraphics.lab3.base.*;
 
 import java.util.Optional;
 
@@ -60,7 +57,7 @@ public class Triangle implements SceneObject {
         var intersectNormal = rawNormal.dotProduct(ray.vector()) < 0 ?
                 rawNormal.multiply(-1) : rawNormal;
 
-        return Optional.of(new IntersectionInfo(intersectPos, intersectNormal, length, this));
+        return Optional.of(new IntersectionInfo(intersectPos, intersectNormal, length, this, new Color(1, 1, 1)));
     }
 
     public Vector3D vertex1() {
