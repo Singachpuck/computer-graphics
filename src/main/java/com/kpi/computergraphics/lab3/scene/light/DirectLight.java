@@ -15,7 +15,7 @@ public class DirectLight implements Light {
     private final double intensity;
 
     public DirectLight(Vector3D direction, Color color, double intensity) {
-        this.direction = direction;
+        this.direction = direction.normalize();
         this.color = color;
         this.intensity = intensity;
     }
@@ -26,8 +26,8 @@ public class DirectLight implements Light {
         var multiplier = dotProduct < 0 ? 0 : dotProduct;
         return new Color(
                 intersection.color().r() * color.r() * multiplier * intensity,
-                intersection.color().r() * color.r() * multiplier * intensity,
-                intersection.color().r() * color.r() * multiplier * intensity
+                intersection.color().g() * color.g() * multiplier * intensity,
+                intersection.color().b() * color.b() * multiplier * intensity
         );
     }
 
