@@ -36,13 +36,13 @@ public class DirectLight implements Light {
         if (intersection == null) {
             return false;
         }
-        var shadowRay = new Ray(intersection.position(), direction.negate());
+        var shadowRay = new Ray(intersection.position(), direction);
         for (SceneObject object : objects) {
             if (object == intersection.object()) {
                 continue;
             }
-            Optional<IntersectionInfo> shadowHit = object.findIntersection(shadowRay);
-            if (shadowHit.isPresent()) {
+            Optional<IntersectionInfo> shadowIntersection = object.findIntersection(shadowRay);
+            if (shadowIntersection.isPresent()) {
                 return true;
             }
         }

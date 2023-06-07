@@ -31,7 +31,7 @@ class OutputStreamRenderer extends Renderer {
         if (intersection == null) {
             toPrint = ' ';
         } else {
-            final double lightRate = intersection.normal().dotProduct(scene.light);
+            final double lightRate = 0.5;//intersection.normal().dotProduct(scene.lights.get(0).);
             if (lightRate < 0) {
                 toPrint = ' ';
             } else if (lightRate < 0.2) {

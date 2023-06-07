@@ -1,11 +1,11 @@
 package com.kpi.computergraphics.lab3.render;
 
-import com.kpi.computergraphics.lab3.scene.Camera;
-import com.kpi.computergraphics.lab3.scene.objects.IntersectionInfo;
-import com.kpi.computergraphics.lab3.scene.Scene;
-import com.kpi.computergraphics.lab3.scene.objects.SceneObject;
 import com.kpi.computergraphics.lab3.base.Ray;
 import com.kpi.computergraphics.lab3.base.Vector3D;
+import com.kpi.computergraphics.lab3.scene.Camera;
+import com.kpi.computergraphics.lab3.scene.Scene;
+import com.kpi.computergraphics.lab3.scene.objects.IntersectionInfo;
+import com.kpi.computergraphics.lab3.scene.objects.SceneObject;
 
 import java.util.List;
 import java.util.Optional;
@@ -45,33 +45,11 @@ public abstract class Renderer {
                             : intersection;
                 }
 
-                if (checkShadow(closestIntersection)) {
-                    closestIntersection = null;
-                }
-
                 intersect(closestIntersection);
             }
             rowEnd();
         }
         renderEnd();
-    }
-
-    public boolean checkShadow(IntersectionInfo closestHit) {
-        if (closestHit == null) {
-            return false;
-        }
-
-        Ray shadowRay = new Ray(closestHit.position(), scene.light.multiply(-1));
-        for (final SceneObject object : this.scene.objects) {
-            if (object == closestHit.object()) {
-                continue;
-            }
-            Optional<IntersectionInfo> shadowHit = object.findIntersection(shadowRay);
-            if (shadowHit.isPresent()) {
-                return true;
-            }
-        }
-        return false;
     }
 
     protected abstract void renderStart();

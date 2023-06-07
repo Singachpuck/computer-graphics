@@ -1,7 +1,8 @@
 package com.kpi.computergraphics.lab3.render;
 
-import com.kpi.computergraphics.lab3.scene.objects.IntersectionInfo;
+import com.kpi.computergraphics.lab3.base.Color;
 import com.kpi.computergraphics.lab3.scene.Scene;
+import com.kpi.computergraphics.lab3.scene.objects.IntersectionInfo;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -44,9 +45,18 @@ class PPMRenderer extends Renderer {
         if (intersection == null) {
             toPrint = "0 0 0\n";
         } else {
-            final double lightRate = intersection.normal().dotProduct(scene.light);
-            final double grayRate = lightRate < 0 ? 0 : Math.round(lightRate * 255);
-            toPrint = grayRate + " " + grayRate + " " + grayRate + "\n";
+            var color = new Color(0, 0, 0);
+
+            for (var light : scene.lights) {
+                if (light.checkShadow(intersection, scene.objects)) continue;
+                var additionalColor = light.checkColor(intersection);
+                color = new Color(
+                        color.r() + additionalColor.r(),
+                        color.g() + additionalColor.g(),
+                        color.b() + additionalColor.b());
+            }
+            intersection.color(color);
+            toPrint = colorIntensity(color.r()) + " " + colorIntensity(color.g()) + " " + colorIntensity(color.b()) + "\n";
         }
 
         try {
@@ -54,6 +64,10 @@ class PPMRenderer extends Renderer {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private int colorIntensity(double colorRate) {
+        return colorRate > 1 ? 255 : (int) Math.round(colorRate * 255);
     }
 
     @Override
