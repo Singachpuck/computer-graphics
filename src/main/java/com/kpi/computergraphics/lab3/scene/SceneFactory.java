@@ -1,6 +1,10 @@
 package com.kpi.computergraphics.lab3.scene;
 
+import com.kpi.computergraphics.lab3.base.Color;
 import com.kpi.computergraphics.lab3.base.Vector3D;
+import com.kpi.computergraphics.lab3.scene.light.DirectLight;
+import com.kpi.computergraphics.lab3.scene.light.AmbientLight;
+import com.kpi.computergraphics.lab3.scene.light.Light;
 import com.kpi.computergraphics.lab3.scene.objects.PolygonMesh;
 import com.kpi.computergraphics.lab3.scene.objects.SceneObject;
 import com.kpi.computergraphics.lab3.scene.objects.Sphere;
@@ -19,14 +23,32 @@ public class SceneFactory {
     private final Map<String, Scene> scenes = new HashMap<>();
 
     private final Camera defaultCamera;
-    private final Vector3D defaultLight;
+    private final Light defaultLight;
 
     public SceneFactory() {
         defaultCamera = new Camera(
                 new Vector3D(0, 0, -2000),
                 new Vector3D(0, 0, 1),
                 Math.PI / 3, 800, 600);
-        defaultLight = new Vector3D(-1, -1, 1);
+        defaultLight = new DirectLight(
+                new Vector3D(1, 1, -1),
+                new Color(1, 1, 1),
+                0.2
+        );
+        var secondLight = new DirectLight(
+                new Vector3D(-1, 1, 1),
+                new Color(1, 0.5, 0.75),
+                0.5
+        );
+        var thirdLight = new DirectLight(
+                new Vector3D(1, -1, 0),
+                new Color(0.3, 1, 0.75),
+                0.5
+        );
+        var envLight = new AmbientLight(
+                new Color(0.3, 1, 0.75),
+                0.5
+        );
         try {
             InputStream input = new FileInputStream("src/main/resources/cow.obj");
             PolygonMesh cowMesh = readStream(input);
@@ -34,7 +56,7 @@ public class SceneFactory {
             List<SceneObject> cowOnSphereObjects = new ArrayList<>();
             cowOnSphereObjects.add(cowMesh);
             cowOnSphereObjects.add(sphere);
-            var cowOnSphereScene = new Scene(cowOnSphereObjects, defaultCamera, defaultLight);
+            var cowOnSphereScene = new Scene(cowOnSphereObjects, defaultCamera, List.of(defaultLight,envLight));
             scenes.put("cow_on_sphere", cowOnSphereScene);
 
             Triangle triangle = new Triangle(
@@ -45,7 +67,7 @@ public class SceneFactory {
             List<SceneObject> geometryObjects = new ArrayList<>();
             geometryObjects.add(triangle);
             geometryObjects.add(sphere);
-            var geometryScene = new Scene(geometryObjects, defaultCamera, defaultLight);
+            var geometryScene = new Scene(geometryObjects, defaultCamera, List.of(defaultLight));
             scenes.put("geometry", geometryScene);
         } catch (Exception e) {
             e.printStackTrace();
@@ -76,7 +98,7 @@ public class SceneFactory {
             InputStream input = new FileInputStream("src/main/resources/" + fileName);
             PolygonMesh mesh = readStream(input);
             List<SceneObject> objects = List.of(mesh);
-            return new Scene(objects, defaultCamera, defaultLight);
+            return new Scene(objects, defaultCamera, List.of(defaultLight));
         } catch (Exception e) {
             throw new IllegalStateException("No such file found");
         }
