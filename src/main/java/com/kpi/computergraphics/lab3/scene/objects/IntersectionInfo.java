@@ -1,5 +1,6 @@
 package com.kpi.computergraphics.lab3.scene.objects;
 
+import com.kpi.computergraphics.lab3.base.Color;
 import com.kpi.computergraphics.lab3.base.Vector3D;
 
 public class IntersectionInfo {
@@ -8,12 +9,14 @@ public class IntersectionInfo {
     private final Vector3D normal;
     private final double length;
     private final SceneObject object;
+    private final Color color;
 
-    public IntersectionInfo(Vector3D position, Vector3D normal, double length, SceneObject object) {
+    public IntersectionInfo(Vector3D position, Vector3D normal, double length, SceneObject object, Color color) {
         this.position = position;
         this.normal = normal.normalize();
         this.length = length;
         this.object = object;
+        this.color = color;
     }
 
     public Vector3D position() {
@@ -30,5 +33,9 @@ public class IntersectionInfo {
 
     public SceneObject object() {
         return object;
+    }
+
+    public Color color() {
+        return color;
     }
 }
