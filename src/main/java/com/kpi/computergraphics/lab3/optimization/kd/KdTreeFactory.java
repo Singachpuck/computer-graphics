@@ -71,7 +71,7 @@ public class KdTreeFactory {
         private final SimpleObjectGroup group;
 
         @Getter
-        private Bound bound;
+        private final Bound bound;
 
         public KdLeaf(List<SceneObject> objects) {
             this.group = new SimpleObjectGroup(objects);

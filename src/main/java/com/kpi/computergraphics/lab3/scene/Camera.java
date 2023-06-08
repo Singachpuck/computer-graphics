@@ -17,7 +17,7 @@ public class Camera implements SceneObject {
     public Matrix cameraTransformMatrix;
 
     Camera(Vector3D focalPoint, Vector3D viewVector, double fov, int horizontalResolution,
-                  int verticalResolution, Matrix cameraTransformMatrix) {
+           int verticalResolution, Matrix cameraTransformMatrix) {
         this.focalPoint = focalPoint;
         this.viewVector = viewVector;
         this.fov = fov;
@@ -34,7 +34,7 @@ public class Camera implements SceneObject {
     }
 
     Camera(Vector3D focalPoint, Vector3D viewVector, double fov, int horizontalResolution,
-                  int verticalResolution) {
+           int verticalResolution) {
         this.focalPoint = focalPoint;
         this.viewVector = viewVector;
         this.fov = fov;

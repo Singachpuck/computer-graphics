@@ -1,7 +1,6 @@
 package com.kpi.computergraphics.lab3.scene;
 
 import com.kpi.computergraphics.lab3.base.Matrix;
-import com.kpi.computergraphics.lab3.base.Vector3D;
 import com.kpi.computergraphics.lab3.scene.light.Light;
 import com.kpi.computergraphics.lab3.scene.objects.SceneObject;
 

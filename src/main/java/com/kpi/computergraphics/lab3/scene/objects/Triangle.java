@@ -23,37 +23,37 @@ public class Triangle implements SceneObject {
     public Bound getBound() {
         return new Bound(new LimitedAxis(LimitedAxis.Axis.X, new BoundUtil.MinMax(
                 DoubleStream.of(
-                            vertex1.x(),
-                            vertex2.x(),
-                            vertex3.x()
-            ).min().getAsDouble(),
+                        vertex1.x(),
+                        vertex2.x(),
+                        vertex3.x()
+                ).min().getAsDouble(),
                 DoubleStream.of(
-                            vertex1.x(),
-                            vertex2.x(),
-                            vertex3.x()
-            ).max().getAsDouble())),
-            new LimitedAxis(LimitedAxis.Axis.Y, new BoundUtil.MinMax(
-                DoubleStream.of(
-                            vertex1.y(),
-                            vertex2.y(),
-                            vertex3.y()
-                    ).min().getAsDouble(),
-                DoubleStream.of(
-                            vertex1.y(),
-                            vertex2.y(),
-                            vertex3.y()
-                    ).max().getAsDouble())),
-            new LimitedAxis(LimitedAxis.Axis.Z, new BoundUtil.MinMax(
-                DoubleStream.of(
-                            vertex1.z(),
-                            vertex2.z(),
-                            vertex3.z()
-                    ).min().getAsDouble(),
-                DoubleStream.of(
-                            vertex1.z(),
-                            vertex2.z(),
-                            vertex3.z()
-                    ).max().getAsDouble())));
+                        vertex1.x(),
+                        vertex2.x(),
+                        vertex3.x()
+                ).max().getAsDouble())),
+                new LimitedAxis(LimitedAxis.Axis.Y, new BoundUtil.MinMax(
+                        DoubleStream.of(
+                                vertex1.y(),
+                                vertex2.y(),
+                                vertex3.y()
+                        ).min().getAsDouble(),
+                        DoubleStream.of(
+                                vertex1.y(),
+                                vertex2.y(),
+                                vertex3.y()
+                        ).max().getAsDouble())),
+                new LimitedAxis(LimitedAxis.Axis.Z, new BoundUtil.MinMax(
+                        DoubleStream.of(
+                                vertex1.z(),
+                                vertex2.z(),
+                                vertex3.z()
+                        ).min().getAsDouble(),
+                        DoubleStream.of(
+                                vertex1.z(),
+                                vertex2.z(),
+                                vertex3.z()
+                        ).max().getAsDouble())));
     }
 
     public void transform(Matrix transformMatrix) {

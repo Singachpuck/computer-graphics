@@ -19,6 +19,18 @@ public class IntersectionInfo {
         this.color = color;
     }
 
+    public static IntersectionInfo getClosest(IntersectionInfo... intersectionInfos) {
+        double minT = intersectionInfos[0].length;
+        IntersectionInfo closestIntersection = intersectionInfos[0];
+        for (int i = 1; i < intersectionInfos.length; i++) {
+            if (intersectionInfos[i].length < minT) {
+                closestIntersection = intersectionInfos[i];
+                minT = intersectionInfos[i].length;
+            }
+        }
+        return closestIntersection;
+    }
+
     public Vector3D position() {
         return position;
     }
@@ -41,17 +53,5 @@ public class IntersectionInfo {
 
     public void color(Color color) {
         this.color = color;
-    }
-
-    public static IntersectionInfo getClosest(IntersectionInfo... intersectionInfos) {
-        double minT = intersectionInfos[0].length;
-        IntersectionInfo closestIntersection = intersectionInfos[0];
-        for (int i = 1; i < intersectionInfos.length; i++) {
-            if (intersectionInfos[i].length < minT) {
-                closestIntersection = intersectionInfos[i];
-                minT = intersectionInfos[i].length;
-            }
-        }
-        return closestIntersection;
     }
 }

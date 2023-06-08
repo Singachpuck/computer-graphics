@@ -30,7 +30,7 @@ public class SceneFactory {
         defaultCamera = new Camera(
                 new Vector3D(0, 0, -2000),
                 new Vector3D(0, 0, 1),
-                Math.PI / 3, 1920, 1080);
+                Math.PI / 3, 800, 600);
         defaultLight = new DirectLight(
                 new Vector3D(1, 1, -1),
                 new Color(1, 1, 1),
@@ -52,7 +52,7 @@ public class SceneFactory {
         );
         var dotLight = new DotLight(
                 new Vector3D(0, 300, 200),
-                new Color(0.3, 1, 0.75),
+                new Color(1, 0.3, 0.2),
                 1000
         );
         try {

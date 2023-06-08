@@ -34,10 +34,11 @@ public class Bound {
                 this.z.getStart() - this.z.getEnd()
         );
     }
+
     private double initSurface() {
         return 2 * (diagonal.x() * diagonal.y() +
-                    diagonal.x() * diagonal.z() +
-                    diagonal.y() * diagonal.z());
+                diagonal.x() * diagonal.z() +
+                diagonal.y() * diagonal.z());
     }
 
     private LimitedAxis.Axis initMaximumExtentAxis() {
@@ -51,11 +52,11 @@ public class Bound {
     }
 
     public BoundUtil.MinMax shoot(Ray ray) {
-        LimitedAxis[] axisArr = new LimitedAxis[] {x, y, z};
-        double[] posArr = new double[] {ray.start().x(),
+        LimitedAxis[] axisArr = new LimitedAxis[]{x, y, z};
+        double[] posArr = new double[]{ray.start().x(),
                 ray.start().y(),
                 ray.start().z()};
-        double[] vectorArr = new double[] {ray.vector().x(),
+        double[] vectorArr = new double[]{ray.vector().x(),
                 ray.vector().y(),
                 ray.vector().z()};
 

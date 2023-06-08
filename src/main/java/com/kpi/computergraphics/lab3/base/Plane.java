@@ -47,7 +47,7 @@ public class Plane implements SceneObject {
         var intersectPos = ray.start().add(ray.vector().multiply(length));
         var intersectNormal = denominator < 0 ? normal.negate() : normal;
 
-        return Optional.of(new IntersectionInfo(intersectPos, intersectNormal, length, this, new Color(1,1,1)));
+        return Optional.of(new IntersectionInfo(intersectPos, intersectNormal, length, this, new Color(1, 1, 1)));
     }
 
     @Override

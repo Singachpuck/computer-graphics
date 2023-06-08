@@ -16,12 +16,12 @@ public class LimitedAxis {
         return limit.getMin();
     }
 
-    public double getEnd() {
-        return limit.getMax();
-    }
-
     public void setStart(double start) {
         this.limit.setMin(start);
+    }
+
+    public double getEnd() {
+        return limit.getMax();
     }
 
     public void setEnd(double end) {
@@ -29,6 +29,6 @@ public class LimitedAxis {
     }
 
     public enum Axis {
-        X, Y, Z;
+        X, Y, Z
     }
 }
