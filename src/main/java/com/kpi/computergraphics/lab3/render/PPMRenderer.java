@@ -1,7 +1,9 @@
 package com.kpi.computergraphics.lab3.render;
 
-import com.kpi.computergraphics.lab3.scene.objects.IntersectionInfo;
+import com.kpi.computergraphics.lab3.scene.ObjectGroupFactory;
 import com.kpi.computergraphics.lab3.scene.Scene;
+import com.kpi.computergraphics.lab3.scene.objects.IntersectionInfo;
+import com.kpi.computergraphics.lab3.scene.objects.SceneObject;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -10,8 +12,8 @@ class PPMRenderer extends Renderer {
 
     private final OutputStream os;
 
-    PPMRenderer(Scene scene, OutputStream os) {
-        super(scene);
+    PPMRenderer(Scene<SceneObject> scene, ObjectGroupFactory ogf, OutputStream os) {
+        super(scene, ogf);
         this.os = os;
     }
 
