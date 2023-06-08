@@ -31,4 +31,16 @@ public class IntersectionInfo {
     public SceneObject object() {
         return object;
     }
+
+    public static IntersectionInfo getClosest(IntersectionInfo... intersectionInfos) {
+        double minT = intersectionInfos[0].length;
+        IntersectionInfo closestHit = intersectionInfos[0];
+        for (int i = 1; i < intersectionInfos.length; i++) {
+            if (intersectionInfos[i].length < minT) {
+                closestHit = intersectionInfos[i];
+                minT = intersectionInfos[i].length;
+            }
+        }
+        return closestHit;
+    }
 }
