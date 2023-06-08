@@ -1,11 +1,10 @@
 package com.kpi.computergraphics.lab3.scene.objects;
 
-import com.kpi.computergraphics.lab3.base.Matrix;
-import com.kpi.computergraphics.lab3.base.Ray;
-import com.kpi.computergraphics.lab3.base.Vector3D;
-import com.kpi.computergraphics.lab3.base.MatrixTransformation;
+import com.kpi.computergraphics.lab3.base.*;
+import com.kpi.computergraphics.lab3.optimization.BoundUtil;
 
 import java.util.Optional;
+import java.util.stream.DoubleStream;
 
 public class Triangle implements SceneObject {
 
@@ -18,6 +17,43 @@ public class Triangle implements SceneObject {
         this.vertex1 = vertex1;
         this.vertex2 = vertex2;
         this.vertex3 = vertex3;
+    }
+
+    @Override
+    public Bound getBound() {
+        return new Bound(new LimitedAxis(LimitedAxis.Axis.X, new BoundUtil.MinMax(
+                DoubleStream.of(
+                            vertex1.x(),
+                            vertex2.x(),
+                            vertex3.x()
+            ).min().getAsDouble(),
+                DoubleStream.of(
+                            vertex1.x(),
+                            vertex2.x(),
+                            vertex3.x()
+            ).max().getAsDouble())),
+            new LimitedAxis(LimitedAxis.Axis.Y, new BoundUtil.MinMax(
+                DoubleStream.of(
+                            vertex1.y(),
+                            vertex2.y(),
+                            vertex3.y()
+                    ).min().getAsDouble(),
+                DoubleStream.of(
+                            vertex1.y(),
+                            vertex2.y(),
+                            vertex3.y()
+                    ).max().getAsDouble())),
+            new LimitedAxis(LimitedAxis.Axis.Z, new BoundUtil.MinMax(
+                DoubleStream.of(
+                            vertex1.z(),
+                            vertex2.z(),
+                            vertex3.z()
+                    ).min().getAsDouble(),
+                DoubleStream.of(
+                            vertex1.z(),
+                            vertex2.z(),
+                            vertex3.z()
+                    ).max().getAsDouble())));
     }
 
     public void transform(Matrix transformMatrix) {

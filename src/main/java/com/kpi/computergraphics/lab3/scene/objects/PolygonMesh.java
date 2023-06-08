@@ -1,5 +1,6 @@
 package com.kpi.computergraphics.lab3.scene.objects;
 
+import com.kpi.computergraphics.lab3.base.Bound;
 import com.kpi.computergraphics.lab3.base.Matrix;
 import com.kpi.computergraphics.lab3.base.Ray;
 
@@ -26,6 +27,15 @@ public class PolygonMesh implements SceneObject {
             }
         }
         return closestIntersection;
+    }
+
+    @Override
+    public Bound getBound() {
+        return null;
+    }
+
+    public List<Triangle> getObjects() {
+        return triangles;
     }
 
     public void transform(Matrix transformMatrix) {
