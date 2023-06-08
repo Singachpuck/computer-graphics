@@ -7,12 +7,12 @@ import com.kpi.computergraphics.lab3.scene.objects.SceneObject;
 
 import java.util.List;
 
-public class Scene {
-    public List<SceneObject> objects;
+public class Scene<T extends SceneObject> {
+    public List<T> objects;
     public Camera camera;
     public List<Light> lights;
 
-    Scene(List<SceneObject> objects, Camera camera, List<Light> lights) {
+    Scene(List<T> objects, Camera camera, List<Light> lights) {
         this.objects = objects;
         this.camera = camera;
         this.lights = lights;

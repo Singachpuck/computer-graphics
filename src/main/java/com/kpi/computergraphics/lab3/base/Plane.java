@@ -1,5 +1,6 @@
 package com.kpi.computergraphics.lab3.base;
 
+import com.kpi.computergraphics.lab3.optimization.BoundUtil;
 import com.kpi.computergraphics.lab3.scene.objects.IntersectionInfo;
 import com.kpi.computergraphics.lab3.scene.objects.SceneObject;
 
@@ -13,6 +14,13 @@ public class Plane implements SceneObject {
     public Plane(Vector3D normal, Vector3D center) {
         this.normal = normal;
         this.position = center;
+    }
+
+    @Override
+    public Bound getBound() {
+        return new Bound(new LimitedAxis(LimitedAxis.Axis.X, new BoundUtil.MinMax(Double.MIN_VALUE, Double.MAX_VALUE)),
+                new LimitedAxis(LimitedAxis.Axis.Y, new BoundUtil.MinMax(Double.MIN_VALUE, Double.MAX_VALUE)),
+                new LimitedAxis(LimitedAxis.Axis.Z, new BoundUtil.MinMax(Double.MIN_VALUE, Double.MAX_VALUE)));
     }
 
     public Vector3D normal() {

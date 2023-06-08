@@ -1,6 +1,7 @@
 package com.kpi.computergraphics.lab3.scene.objects;
 
 import com.kpi.computergraphics.lab3.base.*;
+import com.kpi.computergraphics.lab3.optimization.BoundUtil;
 
 import java.util.Optional;
 
@@ -11,6 +12,16 @@ public class Sphere implements SceneObject {
     public Sphere(Vector3D center, double radius) {
         this.center = center;
         this.radius = radius;
+    }
+
+    @Override
+    public Bound getBound() {
+        Vector3D minVector = this.center.subtract(new Vector3D(this.radius, this.radius, this.radius));
+        Vector3D maxVector = this.center.add(new Vector3D(this.radius, this.radius, this.radius));
+
+        return new Bound(new LimitedAxis(LimitedAxis.Axis.X, new BoundUtil.MinMax(minVector.x(), maxVector.x())),
+                new LimitedAxis(LimitedAxis.Axis.Y, new BoundUtil.MinMax(minVector.y(), maxVector.y())),
+                new LimitedAxis(LimitedAxis.Axis.Z, new BoundUtil.MinMax(minVector.z(), maxVector.z())));
     }
 
     public void transform(Matrix matrix) {
