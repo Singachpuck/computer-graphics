@@ -1,8 +1,8 @@
 package com.kpi.computergraphics.lab3;
 
-import com.kpi.computergraphics.lab3.scene.SceneFactory;
 import com.kpi.computergraphics.lab3.render.PpmRendererFactory;
 import com.kpi.computergraphics.lab3.render.RendererFactory;
+import com.kpi.computergraphics.lab3.scene.SceneFactory;
 
 public class CompositionRoot {
     public static void main(String[] args) {
