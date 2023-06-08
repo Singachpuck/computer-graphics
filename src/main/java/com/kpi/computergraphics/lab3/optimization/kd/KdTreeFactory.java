@@ -60,14 +60,14 @@ public class KdTreeFactory {
         );
     }
 
-    static abstract class KdNode {
+    public static abstract class KdNode {
 
         public abstract Bound getBound();
 
         public abstract Optional<IntersectionInfo> findIntersection(Ray ray, List<SceneObject> avoid, boolean closest);
     }
 
-    static class KdLeaf extends KdNode {
+    public static class KdLeaf extends KdNode {
         private final SimpleObjectGroup group;
 
         @Getter
