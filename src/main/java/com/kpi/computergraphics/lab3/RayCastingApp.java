@@ -49,7 +49,7 @@ public class RayCastingApp {
         }
 
         for (Map.Entry<String, ObjectGroupFactory> ogf : objectGroups.entrySet()) {
-            try (OutputStream output = new BufferedOutputStream(new FileOutputStream(arguments.output()))) {
+            try (OutputStream output = new BufferedOutputStream(new FileOutputStream(arguments.output() + ogf.getKey() + ".ppm"))) {
                 long before = System.nanoTime();
                 rendererFactory.create(scene, ogf.getValue(), output).render();
                 long after = System.nanoTime();
